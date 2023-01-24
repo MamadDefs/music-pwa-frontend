@@ -1,0 +1,31 @@
+.loadingOvalContainer{
+    width: 10rem;
+    height: 0rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+.loadingTitle{
+    font-size: 0.75rem;
+}
+
+.loadingOvalSvg{
+    width: 5rem;
+    height: 5rem;
+    animation-name: rotationAnimation;
+    animation-duration: 1s;
+    animation-delay: 0ms;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes rotationAnimation {
+    0%{
+        transform:rotate(0deg);
+    }
+    100%{
+        transform:rotate(360deg);
+    }
+}
