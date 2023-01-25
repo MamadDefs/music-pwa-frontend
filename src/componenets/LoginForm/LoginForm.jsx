@@ -31,11 +31,15 @@ const LoginForm = () => {
     fetch('https://music-pwa-api.iran.liara.run/api/users/sign-in',option)
     .then((res)=> res.json())
     .then((data)=>{
-      if(data.userRole==='admin'){
-        location.replace('/adminprofile');
-      } else if(data.userRole==='user'){
-        location.replace('/userprofile');
+      if(data.token){
+        document.cookie = `jwtToken=${data.token}`;
+        if(data.userRole==='admin'){
+          location.replace('/adminprofile');
+        } else if(data.userRole==='user'){
+          location.replace('/userprofile');
+        }
       }
+      
     })
   
     
