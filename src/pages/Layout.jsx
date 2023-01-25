@@ -1,33 +1,62 @@
 import React, { useState,useEffect } from 'react'
 import { Outlet, Link, useLocation, redirect } from "react-router-dom";
+
+
 const Layout = () => {
+    
     const [profileRoute,setProfileRoute]=useState("login-signup");
     const location=useLocation();  
-    const request = new XMLHttpRequest();
+    // const request = new XMLHttpRequest();
   
     useEffect(()=>{
-        try {
-        request.open('GET', 'https://music-pwa-api.iran.liara.run/api/users/auth');
+        // try {
+        // request.open('GET', 'https://music-pwa-api.iran.liara.run/api/users/auth');
 
-        request.responseType = 'json';
+        // request.responseType = 'json';
 
-        request.addEventListener('load', () => {
-            const res=request.response;
-            if(res?.isLogin){
-                if(request.response.role=='admin'){
-                    setProfileRoute('adminprofile');
-                } else if(res?.role=='user'){
-                    setProfileRoute('userprofile');
+        // request.addEventListener('load', () => {
+        //     const res=request.response;
+        //     if(res?.isLogin){
+        //         if(request.response.role=='admin'){
+        //             setProfileRoute('adminprofile');
+        //         } else if(res?.role=='user'){
+        //             setProfileRoute('userprofile');
+        //         }
+        //     }
+        // });
+        // request.addEventListener('error', () => console.error('XHR error'));
+
+        // request.send();
+        
+        // } catch (error) {
+        // console.error(`XHR error ${request.status}`);
+        // }
+        const jwtToken=document.cookie.split('=')[1];  
+        console.log(jwtToken)   
+        const option = {
+            method: 'POST',
+            body: JSON.stringify({
+                jwtToken
+            }),
+            headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            }
+        };
+    
+        fetch('https://music-pwa-api.iran.liara.run/api/users/auth',option)
+        .then((res)=> res.json())
+        .then((data)=>{
+            if(jwtToken){
+                if(res?.isLogin){
+                    if(request.response.role=='admin'){
+                        setProfileRoute('adminprofile');
+                    } else if(res?.role=='user'){
+                        setProfileRoute('userprofile');
+                    }
                 }
             }
-        });
-        request.addEventListener('error', () => console.error('XHR error'));
-
-        request.send();
+        })
         
-        } catch (error) {
-        console.error(`XHR error ${request.status}`);
-        }
     },[location])
 
 
