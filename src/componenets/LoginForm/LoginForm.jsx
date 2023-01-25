@@ -32,7 +32,10 @@ const LoginForm = () => {
     .then((res)=> res.json())
     .then((data)=>{
       if(data.token){
-        document.cookie = `jwtToken=${data.token}`;
+        const d = new Date();
+        d.setTime(d.getTime() + (90*24*60*60*1000));
+        let expires = "expires="+ d.toUTCString();
+        document.cookie = `jwtToken=${data.token};${expires};path=/`;
         if(data.userRole==='admin'){
           location.replace('/adminprofile');
         } else if(data.userRole==='user'){
