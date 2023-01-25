@@ -3,7 +3,7 @@ import { Outlet, Link, useLocation, redirect } from "react-router-dom";
 
 
 const Layout = () => {
-    
+
     const [profileRoute,setProfileRoute]=useState("login-signup");
     const location=useLocation();  
     // const request = new XMLHttpRequest();
@@ -46,15 +46,15 @@ const Layout = () => {
         fetch('https://music-pwa-api.iran.liara.run/api/users/auth',option)
         .then((res)=> res.json())
         .then((data)=>{
-            if(jwtToken){
-                if(res?.isLogin){
-                    if(request.response.role=='admin'){
-                        setProfileRoute('adminprofile');
-                    } else if(res?.role=='user'){
-                        setProfileRoute('userprofile');
+                if(jwtToken){
+                    if(data?.isLogin){
+                        if(data?.role=='admin'){
+                            setProfileRoute('adminprofile');
+                        } else if(data?.role=='user'){
+                            setProfileRoute('userprofile');
+                        }
                     }
                 }
-            }
         })
         
     },[location])
