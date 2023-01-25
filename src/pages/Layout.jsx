@@ -7,7 +7,7 @@ const Layout = () => {
   
     useEffect(()=>{
         try {
-        request.open('GET', '/api/users/auth');
+        request.open('GET', 'https://music-pwa-api.iran.liara.run/api/users/auth');
 
         request.responseType = 'json';
 
@@ -24,7 +24,7 @@ const Layout = () => {
         request.addEventListener('error', () => console.error('XHR error'));
 
         request.send();
-
+        
         } catch (error) {
         console.error(`XHR error ${request.status}`);
         }
