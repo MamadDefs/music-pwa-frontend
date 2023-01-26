@@ -196,6 +196,16 @@ img {
   width: 60%;
   
 }
+.submitBtn{
+  background-color: var(--first-color-alt);
+  color: var(--body-color);
+  width: 60%;
+}
+.exitBtn{
+  background-color: red;
+  color: var(--body-color);
+  width: 60%;
+}
 
 .form-holder input,button{
   margin-top: 0.7rem;
@@ -240,12 +250,13 @@ img {
 
 .account-information{
   height: 20vh;
-  margin-right: 3rem;
   margin-top: 1.5rem;
   margin-bottom: 12rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  justify-content: center;
+  align-items: center;
 }
 .account-information h3{
   color: black;

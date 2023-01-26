@@ -1,6 +1,19 @@
 import React from 'react'
 
 const UserProfile = () => {
+    
+    function deleteCookies() {
+        var allCookies = document.cookie.split(';');
+        
+        // The "expire" attribute of every cookie is 
+        // Set to "Thu, 01 Jan 1970 00:00:00 GMT"
+        for (var i = 0; i < allCookies.length; i++)
+            document.cookie = allCookies[i] + "=;expires="
+            + new Date(0).toUTCString();
+
+        location.replace("/");
+    }
+
   return (
     <div id="page-content-holder">
             <div className="profile-holder">
@@ -8,8 +21,9 @@ const UserProfile = () => {
                 <h3>عکس جدیدی برای پروفایل خود آپلود کنید</h3>
                 <form action="/users/profile/upload-image" method="post" encType="multipart/form-data">
                     <input type="file" name="profileImage"/>
-                    <button type="submit" value="submit" >آپلود</button>
+                    
                 </form>
+                <button type="submit" className='submitBtn' value="submit" >آپلود</button>
             </div>
             <div className="account-information">
                 <br/>
@@ -21,7 +35,10 @@ const UserProfile = () => {
                 <br/>
                 <h3>نوع اکانت</h3>
                 <h4>معمولی‌</h4>
+                <button type="submit" onClick={()=>deleteCookies()} className='exitBtn' value="submit" >خروج</button>
             </div>
+            
+            
         </div>
   )
 }
