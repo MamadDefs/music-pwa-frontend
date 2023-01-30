@@ -2,9 +2,9 @@ import React, { useState,useEffect } from 'react'
 import { Outlet, Link, useLocation, redirect } from "react-router-dom";
 
 
-const Layout = () => {
+const Layout = ({profileRoute,setProfileRoute}) => {
 
-    const [profileRoute,setProfileRoute]=useState("login-signup");
+    
     const location=useLocation();  
     // const request = new XMLHttpRequest();
   

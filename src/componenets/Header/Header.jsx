@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Layout from "../../pages/Layout";
 import HomePage from "../../pages/HomePage";
@@ -11,11 +11,12 @@ import AdminProfile from '../../pages/AdminProfile';
 
 const Header = () => {
  
+  const [profileRoute,setProfileRoute]=useState("login-signup");
     
   return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Layout/>}>
+                <Route path="/" element={<Layout profileRoute={profileRoute} setProfileRoute={setProfileRoute} />}>
                 <Route index element={<HomePage />} />
                 <Route path="search" element={<SearchPage />} />
                 <Route path="playlist" element={<PlaylistPage />} />
