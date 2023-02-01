@@ -13,12 +13,44 @@ const UserProfile = () => {
         location.replace("/");
     }
 
-    const [file, setFile] = useState();
+    const [file, setFile] = useState(null);
 
     const onChangeFile = (e) => {
         setFile(e.target.files[0])
     }
 
+    const onSubmit = () => {
+
+        const option = {
+            method: 'POST',
+            body: JSON.stringify({
+                username,
+                password
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            }
+        };
+
+        fetch('https://music-pwa-api.iran.liara.run/api/users/sign-in', option)
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.token) {
+                    const d = new Date();
+                    d.setTime(d.getTime() + (90 * 24 * 60 * 60 * 1000));
+                    let expires = "expires=" + d.toUTCString();
+                    document.cookie = `jwtToken=${data.token};${expires};path=/`;
+                    if (data.userRole === 'admin') {
+                        location.replace('/adminprofile');
+                    } else if (data.userRole === 'user') {
+                        location.replace('/userprofile');
+                    }
+                }
+
+            })
+
+
+    }
     return (
         <div id="page-content-holder">
             <div className="profile-holder">
