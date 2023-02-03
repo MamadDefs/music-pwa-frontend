@@ -21,9 +21,12 @@ const UserProfile = ({ userInfo }) => {
     }
 
     const onSubmit = () => {
-
+        const jwtToken = document.cookie.split('=')[1];
         const option = {
             method: 'POST',
+            body: JSON.stringify({
+                jwtToken
+            }),
             files: {
                 profileImage: file
             },
@@ -31,26 +34,33 @@ const UserProfile = ({ userInfo }) => {
                 'Content-type': 'application/json; charset=UTF-8',
             }
         };
-
-        fetch('https://music-pwa-api.iran.liara.run/api/users/profile/upload-image', option)
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data)
-                if (data.token) {
-                    const d = new Date();
-                    d.setTime(d.getTime() + (90 * 24 * 60 * 60 * 1000));
-                    let expires = "expires=" + d.toUTCString();
-                    document.cookie = `jwtToken=${data.token};${expires};path=/`;
-                    if (data.userRole === 'admin') {
-                        location.replace('/adminprofile');
-                    } else if (data.userRole === 'user') {
-                        location.replace('/userprofile');
-                    }
-                }
-
+        const formData = new FormData()
+        formData.append('jwtToken', jwtToken);
+        formData.append('profileImage', file);
+        axios.post('https://music-pwa-api.iran.liara.run/api/users/profile/upload-image',
+            formData
+            , {
+            }).then(res => {
+                console.log(res)
             })
 
+        // fetch('https://music-pwa-api.iran.liara.run/api/users/profile/upload-image', option)
+        //     .then((res) => res.json())
+        //     .then((data) => {
+        //         console.log(data)
+        //         if (data.token) {
+        //             const d = new Date();
+        //             d.setTime(d.getTime() + (90 * 24 * 60 * 60 * 1000));
+        //             let expires = "expires=" + d.toUTCString();
+        //             document.cookie = `jwtToken=${data.token};${expires};path=/`;
+        //             if (data.userRole === 'admin') {
+        //                 location.replace('/adminprofile');
+        //             } else if (data.userRole === 'user') {
+        //                 location.replace('/userprofile');
+        //             }
+        //         }
 
+        //     })
     }
 
     const defaultProfileImageUrl = "https://music-pwa-api.iran.liara.run/img/default.png";
@@ -77,8 +87,6 @@ const UserProfile = ({ userInfo }) => {
                 <h4>معمولی‌</h4>
                 <button type="submit" onClick={() => deleteCookies()} className='exitBtn' value="submit" >خروج</button>
             </div>
-
-
         </div>
     )
 }
