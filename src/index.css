@@ -81,7 +81,7 @@ img {
   height: 100vh;
 }
 
-.music-section{
+.music-section {
   width: 90%;
   margin: auto;
   display: grid;
@@ -92,25 +92,25 @@ img {
 }
 
 
-.song-image{
+.song-image {
   width: 9rem;
   border-radius: 0.8rem;
 }
 
-.song-name{
+.song-name {
   color: black;
   margin-top: 0.5rem;
   margin-bottom: 0.25rem;
   font-size: 0.8rem;
 }
 
-.artist-name{
+.artist-name {
   color: #F5487F;
   font-size: 0.7rem;
 }
 
-.music-section-title{
-  text-align:center;
+.music-section-title {
+  text-align: center;
   margin-bottom: 1.5rem;
   font-size: 1.1rem;
   color: black;
@@ -118,7 +118,7 @@ img {
   margin-bottom: 2rem;
 }
 
-.signupin{
+.signupin {
   width: 90%;
   height: 50vh;
   margin: auto;
@@ -129,7 +129,7 @@ img {
 }
 
 
-.form-changer{
+.form-changer {
   padding-top: 5rem;
   height: 18vh;
   width: 80%;
@@ -137,7 +137,7 @@ img {
   display: flex;
 }
 
-.form-changer *{
+.form-changer * {
   display: flex;
   width: 50%;
   justify-content: center;
@@ -146,11 +146,11 @@ img {
   border-bottom: solid rgba(0, 0, 0, 0.2);
 }
 
-.login-btn{
+.login-btn {
   border-bottom: solid rgba(0, 0, 0, 0.8);
 }
 
-.form-holder{
+.form-holder {
   position: relative;
   width: 90%;
   display: flex;
@@ -159,87 +159,93 @@ img {
   flex-direction: column;
 }
 
-.form-btn{
+.form-btn {
   width: 85%;
 }
 
-.fileInputBox{
+.fileInputBox {
   border: 0rem solid black;
   padding: 0.5rem;
   border-radius: 0.5rem;
   box-shadow: 0.1rem 0.1rem 0.7rem rgba(0, 0, 0, 0.25);
 }
-.panel-box{
+
+.panel-box {
   width: 80%;
   margin: auto;
   margin-top: 5rem;
   border: 0rem solid black;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  box-shadow: 0.1rem 0.1rem 0.7rem rgba(0, 0, 0, 0.25);  
+  box-shadow: 0.1rem 0.1rem 0.7rem rgba(0, 0, 0, 0.25);
 }
 
-.form-holder form{
+.form-holder form {
   width: 85%;
   display: flex;
   flex-direction: column;
 }
 
-.form-holder button{
+.form-holder button {
   background-color: var(--first-color-alt);
   color: var(--body-color);
 }
 
-.form_btn{
+.form_btn {
   background-color: var(--first-color-alt);
   color: var(--body-color);
   width: 60%;
-  
+
 }
-.submitBtn{
+
+.submitBtn {
   background-color: var(--first-color-alt);
   color: var(--body-color);
   width: 60%;
 }
-.exitBtn{
+
+.exitBtn {
   background-color: red;
   color: var(--body-color);
   width: 60%;
 }
 
-.form-holder input,button{
+.form-holder input,
+button {
   margin-top: 0.7rem;
   margin-bottom: 0.7rem;
   padding: 0.3rem;
   border-radius: 0.6rem;
 }
 
-.profile-image{
+.profile-image {
   border-radius: 50%;
   width: 6rem;
   height: 6rem;
 }
 
-.profile-holder{
+.profile-holder {
   width: 90%;
   height: 40vh;
   margin: auto;
   display: flex;
   align-items: center;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: space-around;
 }
 
-.profile-holder h3{
+.profile-holder h3 {
   font-size: var(--normal-font-size);
 }
-.profile-holder form{
+
+.profile-holder form {
   display: flex;
   flex-direction: column;
   width: 50%;
-  
+
 }
-.profile-holder button{
+
+.profile-holder button {
   margin-top: 0.7rem;
   margin-bottom: 0.7rem;
   padding: 0.3rem;
@@ -248,7 +254,7 @@ img {
   background-color: var(--first-color-alt);
 }
 
-.account-information{
+.account-information {
   height: 20vh;
   margin-top: 1.5rem;
   margin-bottom: 12rem;
@@ -258,12 +264,13 @@ img {
   justify-content: center;
   align-items: center;
 }
-.account-information h3{
+
+.account-information h3 {
   color: black;
 }
 
 /*=============== MUSIC PLAYER ===============*/
-.music-player{
+.music-player {
   position: fixed;
   width: 100vw;
   height: 9vh;
@@ -279,7 +286,7 @@ img {
   animation: bubble 1.0s forwards;
 }
 
-#music-player-audio{
+#music-player-audio {
   position: absolute;
   left: 2.5rem;
   top: 15%;
@@ -289,7 +296,7 @@ img {
   animation: bubble 1.0s forwards;
 }
 
-#tumbnail{
+#tumbnail {
   position: absolute;
   width: 48px;
   height: 48px;
@@ -301,20 +308,20 @@ img {
 
 }
 
-.maximize-btn{
+.maximize-btn {
   position: absolute;
   top: 0rem;
   left: 0.8rem;
 }
 
-.minimize-btn{
+.minimize-btn {
   position: absolute;
   top: 3.6rem;
   left: 0.7rem;
   display: none;
 }
 
-#song-name{
+#song-name {
   position: absolute;
   top: 61%;
   right: 15%;
@@ -322,7 +329,7 @@ img {
   display: none;
 }
 
-#song-singer{
+#song-singer {
   position: absolute;
   top: 66%;
   right: 15%;
@@ -333,32 +340,34 @@ img {
 /*=============== MUSIC PLAYER ANIMATION ===============*/
 
 @keyframes maximize {
-  0%{
-  }
-  100%{
+  0% {}
+
+  100% {
     height: 100vh;
     bottom: 0rem;
   }
 }
 
 @keyframes minimize {
-  0%{
+  0% {
     height: 100vh;
     bottom: 0rem;
   }
-  100%{
+
+  100% {
     height: 9vh;
     bottom: 4.3rem;
   }
 }
 
 @keyframes maximize-tumbnail {
-  0%{
+  0% {
     border-radius: 50%;
   }
-  100%{
+
+  100% {
     border-radius: 15%;
-    width:5rem;
+    width: 5rem;
     height: 5rem;
     right: 7.5%;
     top: 12.5%;
@@ -366,14 +375,15 @@ img {
 }
 
 @keyframes minimize-tumbnail {
-  0%{
+  0% {
     border-radius: 15%;
     width: 5rem;
     height: 5rem;
     right: 7.5%;
     top: 12.5%;
   }
-  100%{
+
+  100% {
     width: 48px;
     height: 48px;
     top: 10%;
@@ -383,13 +393,14 @@ img {
 }
 
 @keyframes maximize-audio {
-  0%{
+  0% {
     left: 2.5rem;
     top: 20%;
     width: 70%;
     height: 60%;
   }
-  100%{
+
+  100% {
     width: 85%;
     height: 10%;
     right: 7.5%;
@@ -398,13 +409,14 @@ img {
 }
 
 @keyframes minimize-audio {
-  0%{
+  0% {
     width: 85%;
     height: 10%;
     right: 7.5%;
     top: 75%;
   }
-  100%{
+
+  100% {
     left: 2.5rem;
     top: 20%;
     width: 70%;
@@ -419,11 +431,11 @@ img {
   margin-right: 1rem;
 }
 
-.nav-container-top{
+.nav-container-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin:0.4rem 1rem 0.4rem 1rem;
+  margin: 0.4rem 1rem 0.4rem 1rem;
 
 }
 
@@ -476,7 +488,7 @@ img {
   }
 }
 
-.nav__list, 
+.nav__list,
 .nav__link {
   display: flex;
   flex-direction: row-reverse;
@@ -536,21 +548,27 @@ img {
   body {
     margin: 0;
   }
+
   .section {
     padding: 7rem 0 2rem;
   }
+
   .nav {
     height: calc(var(--header-height) + 1.5rem);
   }
+
   .nav__img {
     display: none;
   }
+
   .nav__icon {
     display: none;
   }
+
   .nav__name {
     font-size: var(--normal-font-size);
   }
+
   .nav__link:hover {
     color: var(--first-color);
   }
@@ -565,7 +583,7 @@ img {
     border-radius: 50%;
   }
 
- 
+
 }
 
 @media screen and (min-width: 1024px) {
@@ -574,4 +592,3 @@ img {
     margin-right: auto;
   }
 }
-

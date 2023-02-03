@@ -8,6 +8,7 @@ import LoginPage from "../../pages/LoginPage";
 import NoPage from '../../pages/NoPage';
 import UserProfile from '../../pages/UserProfile';
 import AdminProfile from '../../pages/AdminProfile';
+import UploadMusic from '../../pages/UploadMusic';
 
 const Header = () => {
 
@@ -24,6 +25,7 @@ const Header = () => {
           <Route path="login-signup" element={<LoginPage />} />
           <Route path='userprofile' element={<UserProfile userInfo={userInfo} />} />
           <Route path='adminprofile' element={<AdminProfile userInfo={userInfo} />} />
+          <Route path='uploadMusic' element={<UploadMusic userInfo={userInfo} />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
