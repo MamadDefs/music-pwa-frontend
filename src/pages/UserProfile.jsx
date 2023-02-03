@@ -16,25 +16,26 @@ const UserProfile = ({ userInfo }) => {
     const [file, setFile] = useState(null);
 
     const onChangeFile = (e) => {
-        setFile(e.target.files[0])
+        console.log(e.target.files[0])
+        setFile({ profileImage: e.target.files[0] })
     }
 
     const onSubmit = () => {
 
         const option = {
             method: 'POST',
-            body: JSON.stringify({
-                username,
-                password
-            }),
+            files: {
+                profileImage: file
+            },
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
             }
         };
 
-        fetch('https://music-pwa-api.iran.liara.run/api/users/sign-in', option)
+        fetch('https://music-pwa-api.iran.liara.run/api/users/profile/upload-image', option)
             .then((res) => res.json())
             .then((data) => {
+                console.log(data)
                 if (data.token) {
                     const d = new Date();
                     d.setTime(d.getTime() + (90 * 24 * 60 * 60 * 1000));
@@ -51,13 +52,15 @@ const UserProfile = ({ userInfo }) => {
 
 
     }
+
+    const defaultProfileImageUrl = "https://music-pwa-api.iran.liara.run/img/default.png";
     return (
         <div id="page-content-holder">
             <div className="profile-holder">
-                <img className="profile-image" src="/img/Mehrdad - Masale.jpg" alt="" />
+                <img className="profile-image" src={userInfo?.profileImage ? userInfo?.profileImage : defaultProfileImageUrl} alt="" />
                 <h3>عکس جدیدی برای پروفایل خود آپلود کنید</h3>
                 <form action="/users/profile/upload-image" method="post" encType="multipart/form-data">
-                    <input type="file" name="profileImage" />
+                    <input type="file" name="profileImage" onChange={(e) => onChangeFile(e)} />
 
                 </form>
                 <button type="submit" className='submitBtn' value="submit" onClick={() => onSubmit()} >آپلود</button>

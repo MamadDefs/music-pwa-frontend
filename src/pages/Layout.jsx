@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Outlet, Link, useLocation, redirect } from "react-router-dom";
 
 
-const Layout = ({ profileRoute, setProfileRoute, setUserInfo }) => {
+const Layout = ({ profileRoute, setProfileRoute, userInfo, setUserInfo }) => {
 
 
     const location = useLocation();
@@ -39,14 +39,14 @@ const Layout = ({ profileRoute, setProfileRoute, setUserInfo }) => {
 
     }, [location])
 
-
+    const defaultProfileImageUrl = "https://music-pwa-api.iran.liara.run/img/default.png";
 
     return (
         <div>
             <header className='header' id='header'>
                 <div className='nav-container-top'>
-                    <a href="#" className="nav__logo">Marlon</a>
-                    <img src="/img/Mehrdad - Masale.jpg" alt="" className="nav__img" />
+                    <Link to={profileRoute} className="nav__logo">{userInfo?.username}</Link>
+                    <img src={userInfo?.profileImage ? userInfo?.profileImage : defaultProfileImageUrl} alt="" className="nav__img" />
                 </div>
                 <nav className='nav-container'>
                     <div className='nav__menu' id="nav-menu">

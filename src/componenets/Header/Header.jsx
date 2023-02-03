@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout profileRoute={profileRoute} setProfileRoute={setProfileRoute} setUserInfo={setUserInfo} />}>
+        <Route path="/" element={<Layout profileRoute={profileRoute} setProfileRoute={setProfileRoute} userInfo={userInfo} setUserInfo={setUserInfo} />}>
           <Route index element={<HomePage />} />
           <Route path="search" element={<SearchPage />} />
           <Route path="playlist" element={<PlaylistPage />} />
