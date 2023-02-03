@@ -30,7 +30,7 @@ const UploadMusic = () => {
     }
 
     const onClick = () => {
-
+        const jwtToken = document.cookie.split('=')[1];
         const option = {
             method: 'POST',
             body: JSON.stringify({
@@ -39,14 +39,15 @@ const UploadMusic = () => {
                 category,
                 artist,
                 coverImage: imageLink,
-                musicLink
+                musicLink,
+                jwtToken
             }),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
             }
         };
 
-        fetch('https://music-pwa-api.iran.liara.run/api/musics/upload/music', option)
+        fetch('https://music-pwa-api.iran.liara.run/api/musics/upload-music', option)
             .then((res) => res.json())
             .then((data) => {
                 console.log(data)

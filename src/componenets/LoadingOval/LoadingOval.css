@@ -1,17 +1,18 @@
-.loadingOvalContainer{
+.loadingOvalContainer {
     width: 10rem;
-    height: 0rem;
+    height: 10rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: auto;
 }
-.loadingTitle{
+
+.loadingTitle {
     font-size: 0.75rem;
 }
 
-.loadingOvalSvg{
+.loadingOvalSvg {
     width: 5rem;
     height: 5rem;
     animation-name: rotationAnimation;
@@ -22,10 +23,11 @@
 }
 
 @keyframes rotationAnimation {
-    0%{
-        transform:rotate(0deg);
+    0% {
+        transform: rotate(0deg);
     }
-    100%{
-        transform:rotate(360deg);
+
+    100% {
+        transform: rotate(360deg);
     }
 }
