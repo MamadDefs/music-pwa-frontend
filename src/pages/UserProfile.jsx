@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
-const UserProfile = () => {
+const UserProfile = ({ userInfo }) => {
 
     function deleteCookies() {
         var allCookies = document.cookie.split(';');
@@ -65,10 +65,10 @@ const UserProfile = () => {
             <div className="account-information">
                 <br />
                 <h3>نام کاربری</h3>
-                <h4>saoshyant</h4>
+                <h4>{userInfo?.username}</h4>
                 <br />
                 <h3>ایمیل</h3>
-                <h4>saoshyant1999@yahoo.com</h4>
+                <h4>{userInfo?.email}</h4>
                 <br />
                 <h3>نوع اکانت</h3>
                 <h4>معمولی‌</h4>

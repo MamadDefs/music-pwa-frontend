@@ -1,6 +1,6 @@
 import React from 'react'
 
-const AdminProfile = () => {
+const AdminProfile = ({ userInfo }) => {
   return (
     <div>AdminProfile</div>
   )
