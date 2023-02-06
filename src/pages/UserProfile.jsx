@@ -67,7 +67,6 @@ const UserProfile = ({ userInfo }) => {
                 <h3>عکس جدیدی برای پروفایل خود آپلود کنید</h3>
                 <form action="/users/profile/upload-image" method="post" encType="multipart/form-data">
                     <input type="file" name="profileImage" onChange={(e) => onChangeFile(e)} />
-
                 </form>
                 <button type="submit" className='submitBtn' value="submit" onClick={() => onSubmit()} >آپلود</button>
             </div>
