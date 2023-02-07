@@ -93,6 +93,7 @@ img {
 
 .page-content-holder {
   margin-top: 5rem;
+  margin-bottom: 5rem;
 }
 
 .song-image {
@@ -430,7 +431,7 @@ img {
 }
 
 .nav__logo {
-  color: #F5487F;
+  color: white;
   font-weight: 600;
 }
 
@@ -462,7 +463,7 @@ img {
   flex-direction: column;
   align-items: center;
   row-gap: 4px;
-  color: #F5487F;
+  color: white;
   font-weight: 600;
 }
 
@@ -665,4 +666,29 @@ img {
   text-align: center;
   margin: 1rem;
   color: #F5487F;
+}
+
+.panel-cart-section {
+  width: 85%;
+  min-height: 30vh;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+}
+
+.panel-cart {
+  height: 20vh;
+  border: 1px solid white;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.panel-cart * {
+  margin-top: 0.5rem;
 }

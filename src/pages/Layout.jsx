@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Outlet, Link, useLocation, redirect } from "react-router-dom";
-
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import QueueMusicOutlinedIcon from '@mui/icons-material/QueueMusicOutlined';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 
 const Layout = ({ profileRoute, setProfileRoute, userInfo, setUserInfo }) => {
 
@@ -54,7 +57,7 @@ const Layout = ({ profileRoute, setProfileRoute, userInfo, setUserInfo }) => {
                             <Link to="/">
                                 <li className="nav__item" id="home-btn" >
                                     <div className="nav__link">
-                                        <i className='bx bx-home-alt nav__icon'></i>
+                                        <HomeOutlinedIcon />
                                         <span className="nav__name">خانه</span>
                                     </div>
                                 </li>
@@ -62,7 +65,7 @@ const Layout = ({ profileRoute, setProfileRoute, userInfo, setUserInfo }) => {
                             <Link to="/search">
                                 <li className="nav__item" id="search-btn">
                                     <div className="nav__link">
-                                        <i className='bx bx-search-alt nav__icon'></i>
+                                        <SearchOutlinedIcon />
                                         <span className="nav__name">جستجو</span>
                                     </div>
                                 </li>
@@ -70,7 +73,7 @@ const Layout = ({ profileRoute, setProfileRoute, userInfo, setUserInfo }) => {
                             <Link to="/playlist">
                                 <li className="nav__item" id="playlist-btn">
                                     <div className="nav__link">
-                                        <i className='bx bx-book-alt nav__icon'></i>
+                                        <QueueMusicOutlinedIcon />
                                         <span className="nav__name">پلی لیست</span>
                                     </div>
                                 </li>
@@ -78,7 +81,8 @@ const Layout = ({ profileRoute, setProfileRoute, userInfo, setUserInfo }) => {
                             <Link to={profileRoute} >
                                 <li className="nav__item" id="profile-btn">
                                     <div className="nav__link">
-                                        <i className='bx bx-user nav__icon'></i>
+                                        {/* <i className='bx bx-user nav__icon'></i> */}
+                                        <AccountCircleOutlinedIcon />
                                         <span className="nav__name">حساب کاربری</span>
                                     </div>
                                 </li>

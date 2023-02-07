@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Outlet, Link, useLocation, redirect } from "react-router-dom";
-const AdminProfile = ({ userInfo }) => {
+
+const AdminProfile = ({ userInfo, setProfileRoute }) => {
   function deleteCookies() {
     var allCookies = document.cookie.split(';');
 

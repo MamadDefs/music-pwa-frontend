@@ -1,7 +1,14 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router';
 import axios from 'axios'
-const UserProfile = ({ userInfo }) => {
+import HelpCenterOutlinedIcon from '@mui/icons-material/HelpCenterOutlined';
+import ImageIcon from '@mui/icons-material/Image';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import { Link } from "react-router-dom";
 
+const UserProfile = ({ userInfo, setProfileRoute }) => {
+
+    const navigate = useNavigate();
     function deleteCookies() {
         var allCookies = document.cookie.split(';');
 
@@ -11,7 +18,8 @@ const UserProfile = ({ userInfo }) => {
             document.cookie = allCookies[i] + "=;expires="
                 + new Date(0).toUTCString();
 
-        location.replace("/");
+        setProfileRoute('/login-signup');
+        navigate('/login-signup')
     }
     const [file, setFile] = useState(null);
 
@@ -36,33 +44,42 @@ const UserProfile = ({ userInfo }) => {
             console.log(ex);
         }
 
-        // const option = {
-        //     method: 'POST',
-        //     body: JSON.stringify({
-        //         jwtToken,
-        //         profileImage: file
-        //     }),
-        //     // files: {
-        //     //     profileImage: file
-        //     // },
-        //     headers: {
-        //         // 'Content-type': 'application/json; charset=UTF-8',
-        //         'content-type': file.type,
-        //         'content-length': `${file.size}`
-        //     }
-        // };
-
-        // fetch('https://music-pwa-api.iran.liara.run/api/users/profile/upload-image', option)
-        //     .then((res) => res.json())
-        //     .then((data) => {
-        //         console.log(data)
-        //     })
     }
 
-    const defaultProfileImageUrl = "https://music-pwa-api.iran.liara.run/img/default.png";
     return (
         <div className="page-content-holder">
-            <div className="profile-holder">
+            <div className='panel-cart-section'>
+                <Link to='/userinformation'>
+                    <div className='panel-cart' style={{ color: 'white' }}>
+                        <HelpCenterOutlinedIcon />
+                        <h3>اطلاعات کاربری</h3>
+                    </div>
+                </Link>
+                <Link to='/uploadprofile'>
+                    <div className='panel-cart' style={{ color: 'white' }}>
+                        <ImageIcon />
+                        <h3>آپلود پروفایل</h3>
+                    </div>
+                </Link>
+                <Link to='/uploadMusic'>
+                    <div className='panel-cart' style={{ color: 'white' }}>
+                        <MusicNoteIcon />
+                        <h3>آپلود آهنگ</h3>
+                    </div>
+                </Link>
+                <div className='panel-cart' style={{ color: 'red' }} onClick={deleteCookies}>
+                    <HelpCenterOutlinedIcon />
+                    <h3>خروج</h3>
+                </div>
+
+            </div>
+        </div>
+    )
+}
+
+export default UserProfile
+
+{/* <div className="profile-holder">
                 <img className="profile-image" src={userInfo?.profileImage ? userInfo?.profileImage : defaultProfileImageUrl} alt="" />
                 <h3>عکس جدیدی برای پروفایل خود آپلود کنید</h3>
                 <form action="/users/profile/upload-image" method="post" encType="multipart/form-data">
@@ -81,9 +98,4 @@ const UserProfile = ({ userInfo }) => {
                 <h3>نوع اکانت</h3>
                 <h4>معمولی‌</h4>
                 <button type="submit" onClick={() => deleteCookies()} className='exitBtn' value="submit" >خروج</button>
-            </div>
-        </div>
-    )
-}
-
-export default UserProfile
+            </div> */}
