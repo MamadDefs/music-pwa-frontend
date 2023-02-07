@@ -6,7 +6,7 @@ import ImageIcon from '@mui/icons-material/Image';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import { Link } from "react-router-dom";
 
-const UserProfile = ({ userInfo, setProfileRoute }) => {
+const UserProfile = ({ userInfo, setUserInfo, setProfileRoute }) => {
 
     const navigate = useNavigate();
     function deleteCookies() {
@@ -18,6 +18,7 @@ const UserProfile = ({ userInfo, setProfileRoute }) => {
             document.cookie = allCookies[i] + "=;expires="
                 + new Date(0).toUTCString();
 
+        setUserInfo(null);
         setProfileRoute('/login-signup');
         navigate('/login-signup')
     }

@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import { Outlet, Link, useLocation, redirect } from "react-router-dom";
+import { useNavigate } from 'react-router';
 
-const AdminProfile = ({ userInfo, setProfileRoute }) => {
+const AdminProfile = ({ userInfo, setUserInfo, setProfileRoute }) => {
+
+  const navigate = useNavigate();
+
   function deleteCookies() {
     var allCookies = document.cookie.split(';');
 
@@ -11,7 +15,9 @@ const AdminProfile = ({ userInfo, setProfileRoute }) => {
       document.cookie = allCookies[i] + "=;expires="
         + new Date(0).toUTCString();
 
-    location.replace("/");
+    setUserInfo(null);
+    setProfileRoute('/login-signup');
+    navigate('/login-signup')
   }
   const [file, setFile] = useState(null);
 
