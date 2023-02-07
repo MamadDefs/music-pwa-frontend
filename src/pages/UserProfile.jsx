@@ -61,7 +61,7 @@ const UserProfile = ({ userInfo }) => {
 
     const defaultProfileImageUrl = "https://music-pwa-api.iran.liara.run/img/default.png";
     return (
-        <div id="page-content-holder">
+        <div className="page-content-holder">
             <div className="profile-holder">
                 <img className="profile-image" src={userInfo?.profileImage ? userInfo?.profileImage : defaultProfileImageUrl} alt="" />
                 <h3>عکس جدیدی برای پروفایل خود آپلود کنید</h3>

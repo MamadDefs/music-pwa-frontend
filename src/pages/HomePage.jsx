@@ -27,7 +27,7 @@ const HomePage = () => {
   if (!data) return (<LoadingOval />)
 
   return (
-    <div id="page-content-holder">
+    <div className="page-content-holder">
       <h2 className="music-section-title">موزیک های ویژه</h2>
       <div className="music-section">
         {data.map((q, index) => {

@@ -39,7 +39,7 @@ const Layout = ({ profileRoute, setProfileRoute, userInfo, setUserInfo }) => {
 
     }, [location])
 
-    const defaultProfileImageUrl = "https://music-pwa-api.iran.liara.run/img/default.png";
+    const defaultProfileImageUrl = "https://music-pwa-api.iran.liara.run/uploads/images/default.png";
 
     return (
         <div>

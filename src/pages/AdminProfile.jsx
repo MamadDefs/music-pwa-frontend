@@ -47,7 +47,7 @@ const AdminProfile = ({ userInfo }) => {
 
   const defaultProfileImageUrl = "https://music-pwa-api.iran.liara.run/img/default.png";
   return (
-    <div id="page-content-holder">
+    <div className="page-content-holder">
       <div className="profile-holder">
         <form action="#">
 
