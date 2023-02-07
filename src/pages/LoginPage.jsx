@@ -1,50 +1,96 @@
 import React, { useState, useEffect } from 'react'
-import LoginForm from '../componenets/LoginForm/LoginForm';
-import SignupForm from '../componenets/SignupForm/SignupForm';
-
 
 const LoginPage = () => {
 
 
-  const [isLogin, setIsLogin] = useState(true);
+  const [signupUsername, setSignupUsername] = useState('');
+  const [signupEmail, setSignupEmail] = useState('');
+  const [signupPassword, setSignupPassword] = useState('');
+  const [signupRePassword, setSignupRePassword] = useState('');
 
-  function login_onclick() {
-    setIsLogin(true);
-    loginBtnStyle = clickedStyle;
-    signupBtnStyle = notClickedStyle;
+  const [signinUsername, setSigninUsername] = useState('');
+  const [signinPassword, setSigninPassword] = useState('');
+
+  const onSignup = (e) => {
+    e.preventDefault();
+    const option = {
+      method: 'POST',
+      body: JSON.stringify({
+        username: signupUsername,
+        email: signupEmail,
+        password: signupPassword,
+        passwordConfirm: signupRePassword
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      }
+    };
+
+    fetch('https://music-pwa-api.iran.liara.run/api/users/sign-up', option)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
   }
 
-  function signup_onclick() {
-    setIsLogin(false);
-    loginBtnStyle = notClickedStyle;
-    signupBtnStyle = clickedStyle;
+  const onSignin = (e) => {
+    e.preventDefault();
+    const option = {
+      method: 'POST',
+      body: JSON.stringify({
+        username: signinUsername,
+        password: signinPassword
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      }
+    };
+
+    fetch('https://music-pwa-api.iran.liara.run/api/users/sign-in', option)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.token) {
+          const d = new Date();
+          d.setTime(d.getTime() + (90 * 24 * 60 * 60 * 1000));
+          let expires = "expires=" + d.toUTCString();
+          document.cookie = `jwtToken=${data.token};${expires};path=/`;
+          if (data.userRole === 'admin') {
+            location.replace('/adminprofile');
+          } else if (data.userRole === 'user') {
+            location.replace('/userprofile');
+          }
+        }
+
+      })
+
   }
 
   return (
-    <div id="page-content-holder">
-      <div className="form-changer">
-        <div className="login-btn" style={loginBtnStyle} onClick={login_onclick}>ورود</div>
-        <div className="signup-btn" style={signupBtnStyle} onClick={signup_onclick} >ثبت نام</div>
-      </div>
-      <div className="signupin">
-        <div className="form-holder">
-          {isLogin ? <LoginForm /> : <SignupForm />}
+    <div className='form-holder'>
+      <div className="main">
+        <input type="checkbox" id="chk" aria-hidden="true" />
+        <div className="signup">
+          <form>
+            <label for="chk" className='form-label' aria-hidden="true">عضویت</label>
+            <input type="text" className='form-input' onChange={(e) => { setSignupUsername(e.target.value) }} placeholder="نام کاربری" required="" />
+            <input type="email" className='form-input' onChange={(e) => { setSignupEmail(e.target.value) }} placeholder="ایمیل" required="" />
+            <input type="password" className='form-input' onChange={(e) => { setSignupPassword(e.target.value) }} placeholder="پسورد" required="" />
+            <input type="password" className='form-input' onChange={(e) => { setSignupRePassword(e.target.value) }} placeholder="تکرار پسورد" required="" />
+            <button className='form-button' onClick={(e) => onSignup(e)}>عضویت</button>
+          </form>
+        </div>
+
+        <div className="login">
+          <form>
+            <label for="chk" className='form-label' aria-hidden="true">ورود</label>
+            <input type="text" className='form-input' onChange={(e) => { setSigninUsername(e.target.value) }} placeholder="نام کاربری" required="" />
+            <input type="password" className='form-input' onChange={(e) => { setSigninPassword(e.target.value) }} placeholder="پسورد" required="" />
+            <button className='form-button' onClick={(e) => onSignin(e)}>ورود</button>
+          </form>
         </div>
       </div>
     </div>
   );
-}
-
-const clickedStyle = {
-  borderBottom: 'solid rgba(0, 0, 0, 0.8)'
-}
-const notClickedStyle = {
-  borderBottom: 'solid rgba(0, 0, 0, 0.2)'
-}
-
-let loginBtnStyle = {
-}
-let signupBtnStyle = {
 }
 
 export default LoginPage
