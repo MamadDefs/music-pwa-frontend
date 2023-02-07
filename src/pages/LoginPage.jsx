@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router';
 
 const LoginPage = () => {
 
@@ -10,6 +11,8 @@ const LoginPage = () => {
 
   const [signinUsername, setSigninUsername] = useState('');
   const [signinPassword, setSigninPassword] = useState('');
+
+  const navigate = useNavigate();
 
   const onSignup = (e) => {
     e.preventDefault();
@@ -55,9 +58,9 @@ const LoginPage = () => {
           let expires = "expires=" + d.toUTCString();
           document.cookie = `jwtToken=${data.token};${expires};path=/`;
           if (data.userRole === 'admin') {
-            location.replace('/adminprofile');
+            navigate('/adminprofile')
           } else if (data.userRole === 'user') {
-            location.replace('/userprofile');
+            navigate('/userprofile')
           }
         }
 
