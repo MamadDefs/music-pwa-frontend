@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router';
 
 const LoginPage = () => {
 
+  const [showBox, setShowBox] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const [signupUsername, setSignupUsername] = useState('');
   const [signupEmail, setSignupEmail] = useState('');
@@ -52,6 +54,10 @@ const LoginPage = () => {
     fetch('https://music-pwa-api.iran.liara.run/api/users/sign-in', option)
       .then((res) => res.json())
       .then((data) => {
+        if (data?.error) {
+          setErrorMessage(data?.message);
+          setShowBox(true);
+        }
         if (data.token) {
           const d = new Date();
           d.setTime(d.getTime() + (90 * 24 * 60 * 60 * 1000));
@@ -63,7 +69,6 @@ const LoginPage = () => {
             navigate('/userprofile')
           }
         }
-
       })
 
   }
@@ -71,6 +76,7 @@ const LoginPage = () => {
   return (
     <div className='form-holder'>
       <div className="main">
+        <div className='error-box'>{showBox ? errorMessage : ''}</div>
         <input type="checkbox" id="chk" aria-hidden="true" />
         <div className="signup">
           <form>

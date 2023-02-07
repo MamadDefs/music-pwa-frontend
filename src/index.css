@@ -633,7 +633,7 @@ img {
   height: 460px;
   background: #eee;
   border-radius: 60% / 10%;
-  transform: translateY(-180px);
+  transform: translateY(-230px);
   transition: .8s ease-in-out;
 }
 
@@ -659,4 +659,10 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.error-box {
+  text-align: center;
+  margin: 1rem;
+  color: #F5487F;
 }
