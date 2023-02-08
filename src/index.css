@@ -692,3 +692,21 @@ img {
 .panel-cart * {
   margin-top: 0.5rem;
 }
+
+.account-information{
+  margin-top: 10rem;
+}
+
+.account-information *{
+  margin-top: 1rem;
+}
+
+.account-information h3{
+  color: #eee;
+  font-size: 1.5rem;
+}
+
+.account-information h4{
+  color: #F5487F;
+  font-size: 1.2rem;
+}
