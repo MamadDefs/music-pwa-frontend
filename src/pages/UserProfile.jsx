@@ -22,30 +22,30 @@ const UserProfile = ({ userInfo, setUserInfo, setProfileRoute }) => {
         setProfileRoute('/login-signup');
         navigate('/login-signup')
     }
-    const [file, setFile] = useState(null);
+    // const [file, setFile] = useState(null);
 
-    const onChangeFile = (e) => {
-        console.log(e.target.files[0])
-        setFile(e.target.files[0])
-    }
+    // const onChangeFile = (e) => {
+    //     console.log(e.target.files[0])
+    //     setFile(e.target.files[0])
+    // }
 
-    const onSubmit = () => {
-        const jwtToken = document.cookie.split('=')[1];
+    // const onSubmit = () => {
+    //     const jwtToken = document.cookie.split('=')[1];
 
-        const formData = new FormData();
-        formData.append("profileImage", file);
-        formData.append("jwtToken", jwtToken);
-        try {
-            const res = axios.post(
-                "https://music-pwa-api.iran.liara.run/api/users/profile/upload-image",
-                formData
-            );
-            console.log(res);
-        } catch (ex) {
-            console.log(ex);
-        }
+    //     const formData = new FormData();
+    //     formData.append("profileImage", file);
+    //     formData.append("jwtToken", jwtToken);
+    //     try {
+    //         const res = axios.post(
+    //             "https://music-pwa-api.iran.liara.run/api/users/profile/upload-image",
+    //             formData
+    //         );
+    //         console.log(res);
+    //     } catch (ex) {
+    //         console.log(ex);
+    //     }
 
-    }
+    // }
 
     return (
         <div className="page-content-holder">

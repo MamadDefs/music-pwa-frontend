@@ -42,14 +42,14 @@ const Layout = ({ profileRoute, setProfileRoute, userInfo, setUserInfo }) => {
 
     }, [location])
 
-    const defaultProfileImageUrl = "https://music-pwa-api.iran.liara.run/uploads/images/default.png";
+    
 
     return (
         <div>
             <header className='header' id='header'>
                 <div className='nav-container-top'>
                     <Link to={profileRoute} className="nav__logo">{userInfo?.username}</Link>
-                    <img src={userInfo?.profileImage ? userInfo?.profileImage : defaultProfileImageUrl} alt="" className="nav__img" />
+                    {userInfo?.profileImage ? <img src={userInfo?.profileImage} alt="" className="nav__img" /> : ''}
                 </div>
                 <nav className='nav-container'>
                     <div className='nav__menu' id="nav-menu">

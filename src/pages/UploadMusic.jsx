@@ -1,6 +1,13 @@
 import React, { useState } from 'react'
 import axios from 'axios';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+
+
 const UploadMusic = () => {
+
+
+    const [loading, setLoading] = useState(false)
 
     const [title, setTitle] = useState('');
     const [desc, setDesc] = useState('');
@@ -29,7 +36,8 @@ const UploadMusic = () => {
         setMusic(e.target.files[0]);
     }
 
-    const onClick = () => {
+    const onClick = (e) => {
+        e.preventDefault();
         const jwtToken = document.cookie.split('=')[1];
         const formData = new FormData();
         formData.append("coverImage", coverImage);
@@ -40,12 +48,17 @@ const UploadMusic = () => {
         formData.append("artist", artist);
         formData.append("jwtToken", jwtToken);
         try {
-            const res = axios.post(
+            setLoading(true);
+            axios.post(
                 "https://music-pwa-api.iran.liara.run/api/musics/upload-music",
                 formData
-            );
-            console.log(res);
+            ).then((res) => { })
+                .then((data) => {
+                    setLoading(false);
+                });
+    
         } catch (ex) {
+            setLoading(false);
             console.log(ex);
         }
     }
@@ -53,7 +66,13 @@ const UploadMusic = () => {
 
     return (
         <div className='form-holder'>
-            <form >
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={loading}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
+            <form className='upload-music-form'>
                 <input type="text" placeholder="نام آهنگ" onChange={(e) => titleChange(e)} value={title} />
                 <input type="text" placeholder="توضیحات آهنگ" onChange={(e) => descChange(e)} value={desc} />
                 <input type="text" placeholder="دسته بندی" onChange={(e) => categoryChange(e)} value={category} />
@@ -62,8 +81,9 @@ const UploadMusic = () => {
                 <input type="file" name="coverImage" onChange={(e) => onChangeCoverImage(e)} />
                 <label>آهنگ را آپلود کنید</label>
                 <input type="file" name="music" onChange={(e) => onChangeMusic(e)} />
+                <button type="submit" className='form-btn' onClick={(e) => onClick(e)}>ایجاد موزیک</button>
             </form>
-            <button type="submit" className='form-btn' onClick={onClick}>ایجاد موزیک</button>
+
         </div>
     )
 }

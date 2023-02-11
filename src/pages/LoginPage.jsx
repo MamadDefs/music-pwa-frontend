@@ -93,7 +93,7 @@ const LoginPage = () => {
         <input type="checkbox" id="chk" aria-hidden="true" />
         <div className="signup">
           <form>
-            <label for="chk" className='form-label' aria-hidden="true">عضویت</label>
+            <label htmlFor="chk" className='form-label' aria-hidden="true">عضویت</label>
             <input type="text" className='form-input' onChange={(e) => { setSignupUsername(e.target.value) }} placeholder="نام کاربری" required="" />
             <input type="email" className='form-input' onChange={(e) => { setSignupEmail(e.target.value) }} placeholder="ایمیل" required="" />
             <input type="password" className='form-input' onChange={(e) => { setSignupPassword(e.target.value) }} placeholder="پسورد" required="" />
@@ -104,7 +104,7 @@ const LoginPage = () => {
 
         <div className="login">
           <form>
-            <label for="chk" className='form-label' aria-hidden="true">ورود</label>
+            <label htmlFor="chk" className='form-label' aria-hidden="true">ورود</label>
             <input type="text" className='form-input' onChange={(e) => { setSigninUsername(e.target.value) }} placeholder="نام کاربری" required="" />
             <input type="password" className='form-input' onChange={(e) => { setSigninPassword(e.target.value) }} placeholder="پسورد" required="" />
             <button className='form-button' onClick={(e) => onSignin(e)}>ورود</button>
