@@ -56,7 +56,6 @@ const UploadMusic = () => {
                 .then((data) => {
                     setLoading(false);
                 });
-    
         } catch (ex) {
             setLoading(false);
             console.log(ex);

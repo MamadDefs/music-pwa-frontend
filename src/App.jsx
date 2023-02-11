@@ -7,10 +7,6 @@ import LoadingOval from './componenets/LoadingOval/LoadingOval';
 
 
 const App = () => {
-  
-  
-
-  // return <LoadingOval/>;
 
   return (
     <div>
