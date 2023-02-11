@@ -4,8 +4,9 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import QueueMusicOutlinedIcon from '@mui/icons-material/QueueMusicOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import MusicPlayer from '../componenets/MusicPlayer/MusicPlayer';
 
-const Layout = ({ profileRoute, setProfileRoute, userInfo, setUserInfo }) => {
+const Layout = ({ musicInfo,profileRoute, setProfileRoute, userInfo, setUserInfo }) => {
 
 
     const location = useLocation();
@@ -92,6 +93,7 @@ const Layout = ({ profileRoute, setProfileRoute, userInfo, setUserInfo }) => {
                 </nav>
             </header>
             <Outlet />
+            {musicInfo ? <MusicPlayer musicInfo={musicInfo} /> : ''}
         </div>
     )
 }

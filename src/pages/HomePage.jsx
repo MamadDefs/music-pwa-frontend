@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Outlet, Link, useLocation, redirect } from "react-router-dom";
 import LoadingOval from '../componenets/LoadingOval/LoadingOval';
 
-const HomePage = () => {
+const HomePage = ({setMusicInfo}) => {
 
 
 
@@ -33,7 +33,7 @@ const HomePage = () => {
         {data.map((q, index) => {
           return (
             <div key={index} className="post">
-              <img src={q?.coverImagePath} alt="" className="song-image" />
+              <img src={q?.coverImagePath} alt="" onClick={()=>setMusicInfo(q)} className="song-image" />
               <h3 className="song-name">{q?.title}</h3>
               <h4 className="artist-name">{q?.artist?.map(r => { return (r + " ") })}</h4>
             </div>

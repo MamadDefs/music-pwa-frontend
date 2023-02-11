@@ -1,8 +1,10 @@
 import React from 'react'
 
-const MusicPlayer = () => {
+const MusicPlayer = ({musicInfo}) => {
   return (
-    <div>MusicPlayer</div>
+    <div>
+      <audio src={musicInfo?.musicPath} autoPlay={true}/>
+    </div>
   )
 }
 

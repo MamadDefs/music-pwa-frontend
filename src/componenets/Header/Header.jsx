@@ -16,12 +16,13 @@ const Header = () => {
 
   const [profileRoute, setProfileRoute] = useState("login-signup");
   const [userInfo, setUserInfo] = useState(null);
+  const [musicInfo,setMusicInfo]=useState(null)
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout profileRoute={profileRoute} setProfileRoute={setProfileRoute} userInfo={userInfo} setUserInfo={setUserInfo} />}>
-          <Route index element={<HomePage />} />
+        <Route path="/" element={<Layout musicInfo={musicInfo} profileRoute={profileRoute} setProfileRoute={setProfileRoute} userInfo={userInfo} setUserInfo={setUserInfo} />}>
+          <Route index element={<HomePage setMusicInfo={setMusicInfo} />} />
           <Route path="search" element={<SearchPage />} />
           <Route path="playlist" element={<PlaylistPage />} />
           <Route path="login-signup" element={<LoginPage />} />
