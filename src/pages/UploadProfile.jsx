@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
-
-
 const UploadProfile = ({ userInfo }) => {
 
     const navigate = useNavigate();
@@ -31,7 +29,7 @@ const UploadProfile = ({ userInfo }) => {
             ).then((res) => { })
             .then((data) => {
                 setLoading(false);
-                navigate(0)
+                navigate('/uploadprofile')
             });
         } catch (ex) {
             setLoading(false);

@@ -42,13 +42,14 @@
 html {
   scroll-behavior: smooth;
   direction: rtl;
+  font-size: 105%;
 }
 
 body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  font-family: 'Jost', sans-serif;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
 }
 
@@ -205,7 +206,7 @@ img {
 .profile-holder button {
   margin-top: 0.7rem;
   margin-bottom: 0.7rem;
-  padding: 0.3rem;
+  padding: 0.3remtest;
   border-radius: 0.6rem;
   color: var(--body-color);
   background-color: var(--first-color-alt);
@@ -408,7 +409,7 @@ img {
   left: 0;
   width: 100%;
   border-bottom: 1px #6d44b8 solid;
-  background-color: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+  background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
   border-radius: 0rem 0rem 1.25rem 1.25rem;
   box-shadow: 0 -1px 12px hsla(var(--hue), var(--sat), 15%, 0.30);
   z-index: var(--z-fixed);
@@ -757,4 +758,89 @@ img {
 .upload-music-form input{
   height: 30px;
   border-radius: 5px;
+}
+
+
+.flexbox {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-bottom: 2rem;
+}
+
+.search {
+  width: 70%;
+  margin: auto;
+}
+
+.search > h2 {
+  color: white;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.search > div {
+  display: inline-block;
+  position: relative;
+  filter: drop-shadow(0 1px #0091c2);
+}
+
+.search > div:after {
+  content: "";
+  background: white;
+  width: 4px;
+  height: 20px;
+  position: absolute;
+  top: 22px;
+  right: -2px;
+  transform: rotate(135deg);
+}
+
+.search > div > input {
+  color: white;
+  font-size: 16px;
+  background: transparent;
+  width: 30px;
+  height: 30px;
+  padding: 10px;
+  border: solid 3px white;
+  outline: none;
+  border-radius: 35px;
+  transition: width 0.5s;
+}
+
+.search > div > input::placeholder {
+  color: #efefef;
+  opacity: 0;
+  transition: opacity 150ms ease-out;
+}
+
+.search > div > input:focus::placeholder {
+  opacity: 1;
+}
+
+.search > div > input:focus,
+.search > div > input:not(:placeholder-shown) {
+  width: 250px;
+}
+
+
+
+.loadmore-btn{
+  width: 60%;
+  height: 40px;
+  background:#24243e;
+  margin-top: 4rem;
+  margin-bottom: 6rem;
+  border-radius: 15px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
 }
