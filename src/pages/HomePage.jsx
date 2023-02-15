@@ -46,7 +46,7 @@ const HomePage = ({setMusicInfo}) => {
       }
     };
     setLoading(true);
-    fetch(`https://music-pwa-api.iran.liara.run/api/musics/all?page=1&limit=${(limit+1)*3+3}`, option)
+    fetch(`https://music-pwa-api.iran.liara.run/api/musics/all?page=1&limit=${(limit+1)*9+9}`, option)
       .then((res) => res.json())
       .then((d) => {
         setLoading(false);

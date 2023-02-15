@@ -833,8 +833,8 @@ img {
   width: 60%;
   height: 40px;
   background:#24243e;
-  margin-top: 4rem;
-  margin-bottom: 6rem;
+  margin-top: 6rem !important;
+  margin-bottom: 10rem !important;
   border-radius: 15px;
   margin: auto;
   display: flex;

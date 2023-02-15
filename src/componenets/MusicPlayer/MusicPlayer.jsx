@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
-const MusicPlayer = ({musicInfo}) => {
+
+const MusicPlayer = ({ musicInfo }) => {
+
+  const playingButton=()=>{
+    let music=document.getElementById('musicPlayer');
+    console.log(music)
+  }
+
   return (
     <div>
-      <audio src={musicInfo?.musicPath} autoPlay={true}/>
+      <p onClick={playingButton} style={{ color: 'white' }}>play</p>
+      <audio id="musicPlayer" src={musicInfo?.musicPath} autoPlay={true} controls={true}/>
     </div>
   )
 }
