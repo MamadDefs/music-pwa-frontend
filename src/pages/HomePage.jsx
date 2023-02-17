@@ -23,7 +23,7 @@ const HomePage = ({setMusicInfo}) => {
       }
     };
     setLoading(true);
-    fetch(`https://music-pwa-api.iran.liara.run/api/musics/all?page=1&limit=${limit*3+3}`, option)
+    fetch(`https://music-pwa-api.iran.liara.run/api/musics/all?page=1&limit=${limit*9+9}`, option)
       .then((res) => res.json())
       .then((d) => {
         setData(d.musics)
@@ -79,7 +79,7 @@ const HomePage = ({setMusicInfo}) => {
           )
         })}
       </div>
-      <div className='loadmore-btn' onClick={()=>loadmore()}>بیشتر نشان بده</div>
+      { musicCount>data.length ? <div className='loadmore-btn' onClick={()=>loadmore()}>بیشتر نشان بده</div> : ''}
     </div>
   )
 }
