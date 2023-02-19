@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useLocation } from "react-router-dom";
 import PlayArrowRoundsedIcon from '@mui/icons-material/PlayArrowRounded';
 import StopRoundedIcon from '@mui/icons-material/StopRounded';
 import SkipPreviousRoundedIcon from '@mui/icons-material/SkipPreviousRounded';
@@ -8,9 +9,19 @@ import OpenInBrowserRoundedIcon from '@mui/icons-material/OpenInBrowserRounded';
 
 const MusicPlayer = ({ musicInfo }) => {
 
+  const location = useLocation();
+
   const [isMaximize,setIsMaximize]= useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
+
+  useEffect(()=>{
+    setIsPlaying(true);
+  },[musicInfo])
+
+  useEffect(()=>{
+    setIsMaximize(false);
+  },[location])
 
   const play = () => {
     document.getElementById('musicPlayer').play()
@@ -21,8 +32,6 @@ const MusicPlayer = ({ musicInfo }) => {
   }
 
   const playingButton = () => {
-
-
     if (isPlaying) {
       setIsPlaying(false);
       pause();

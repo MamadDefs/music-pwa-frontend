@@ -80,23 +80,3 @@ const AdminProfile = ({ userInfo, setUserInfo, setProfileRoute }) => {
 
 export default AdminProfile
 
-{/* <div className="profile-holder">
-                <img className="profile-image" src={userInfo?.profileImage ? userInfo?.profileImage : defaultProfileImageUrl} alt="" />
-                <h3>عکس جدیدی برای پروفایل خود آپلود کنید</h3>
-                <form action="/users/profile/upload-image" method="post" encType="multipart/form-data">
-                    <input type="file" name="profileImage" onChange={(e) => onChangeFile(e)} />
-                </form>
-                <button type="submit" className='submitBtn' value="submit" onClick={() => onSubmit()} >آپلود</button>
-            </div>
-            <div className="account-information">
-                <br />
-                <h3>نام کاربری</h3>
-                <h4>{userInfo?.username}</h4>
-                <br />
-                <h3>ایمیل</h3>
-                <h4>{userInfo?.email}</h4>
-                <br />
-                <h3>نوع اکانت</h3>
-                <h4>معمولی‌</h4>
-                <button type="submit" onClick={() => deleteCookies()} className='exitBtn' value="submit" >خروج</button>
-            </div> */}
