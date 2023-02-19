@@ -6,7 +6,7 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import MusicPlayer from '../componenets/MusicPlayer/MusicPlayer';
 
-const Layout = ({ musicInfo,profileRoute, setProfileRoute, userInfo, setUserInfo }) => {
+const Layout = ({ data,setMusicInfo,musicInfo,profileRoute, setProfileRoute, userInfo, setUserInfo }) => {
 
 
     const location = useLocation();
@@ -93,7 +93,7 @@ const Layout = ({ musicInfo,profileRoute, setProfileRoute, userInfo, setUserInfo
                 </nav>
             </header>
             <Outlet />
-            {musicInfo ? <MusicPlayer musicInfo={musicInfo} /> : ''}
+            {musicInfo ? <MusicPlayer musicInfo={musicInfo} setMusicInfo={setMusicInfo} data={data} /> : ''}
         </div>
     )
 }

@@ -5,11 +5,11 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
 
-const HomePage = ({setMusicInfo}) => {
+const HomePage = ({setMusicInfo,data,setData}) => {
 
 
 
-  const [data, setData] = useState(null);
+  
   const [musicCount, setMusicCount] = useState(null);
   const [limit, setLimit] = useState(0);
   const [loading, setLoading] = useState(false)

@@ -1,14 +1,14 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
 
-const SearchPage = ({setMusicInfo}) => {
+const SearchPage = ({setMusicInfo,data, setData}) => {
 
-  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false)
-
-
+  useEffect(()=>{
+    setData(null);
+  },[])
 
   const searchChange = (e) => {
     let searchTerm = e.target.value;

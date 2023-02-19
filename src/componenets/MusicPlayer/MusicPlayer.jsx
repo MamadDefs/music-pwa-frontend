@@ -7,7 +7,7 @@ import SkipNextRoundedIcon from '@mui/icons-material/SkipNextRounded';
 import CloseFullscreenRoundedIcon from '@mui/icons-material/CloseFullscreenRounded';
 import OpenInBrowserRoundedIcon from '@mui/icons-material/OpenInBrowserRounded';
 
-const MusicPlayer = ({ musicInfo }) => {
+const MusicPlayer = ({ musicInfo,setMusicInfo,data }) => {
 
   const location = useLocation();
 
@@ -25,6 +25,28 @@ const MusicPlayer = ({ musicInfo }) => {
 
   const play = () => {
     document.getElementById('musicPlayer').play()
+    
+    
+  }
+
+  const goNext=()=>{
+    const dataCount=data.length
+    const index=data.findIndex(q=>q._id==musicInfo?._id)+1
+    if(index>dataCount-1){
+      setMusicInfo(data?.[0])
+    } else {
+      setMusicInfo(data?.[index])
+    }
+  }
+
+  const goPrev=()=>{
+    const dataCount=data.length
+    const index=data.findIndex(q=>q._id==musicInfo?._id)-1
+    if(index<0){
+      setMusicInfo(data?.[dataCount-1])
+    } else {
+      setMusicInfo(data?.[index])
+    }
   }
 
   const pause = () => {
@@ -45,7 +67,7 @@ const MusicPlayer = ({ musicInfo }) => {
     const currentTime  = document.getElementById('musicPlayer').currentTime;
     const duration = document.getElementById('musicPlayer').duration;
 
-    setProgress(parseInt((currentTime / duration) * 100))
+    setProgress(parseInt((currentTime / duration) * 100));
     
     if(progress>=99){
       document.getElementById('musicPlayer').currentTime=0;
@@ -88,11 +110,11 @@ const MusicPlayer = ({ musicInfo }) => {
         
           <div className='musicPlayerControler' >
           <div className='playingButton'>
-            <SkipNextRoundedIcon sx={sx} />
+            <SkipNextRoundedIcon sx={sx} onClick={goNext} />
             {!isPlaying ? 
             <PlayArrowRoundsedIcon sx={sx} onClick={playingButton} /> :
              <StopRoundedIcon sx={sx} onClick={playingButton} />}
-             <SkipPreviousRoundedIcon sx={sx} />
+             <SkipPreviousRoundedIcon sx={sx} onClick={goPrev} />
           </div>
           </div>
       </div>
@@ -102,11 +124,11 @@ const MusicPlayer = ({ musicInfo }) => {
           <img src={musicInfo?.coverImagePath} />
         </div>
         <div className='playingButtonMin'>
-            <SkipNextRoundedIcon sx={sx2} />
+            <SkipNextRoundedIcon sx={sx2} onClick={goNext} />
             {!isPlaying ? 
             <PlayArrowRoundsedIcon sx={sx2} onClick={playingButton} /> :
              <StopRoundedIcon sx={sx2} onClick={playingButton} />}
-             <SkipPreviousRoundedIcon sx={sx2} />
+             <SkipPreviousRoundedIcon sx={sx2} onClick={goPrev} />
           </div>
        </div>
        }
