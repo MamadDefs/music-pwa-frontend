@@ -7,9 +7,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 const HomePage = ({setMusicInfo,data,setData}) => {
 
-
-
-  
   const [musicCount, setMusicCount] = useState(null);
   const [limit, setLimit] = useState(0);
   const [loading, setLoading] = useState(false)

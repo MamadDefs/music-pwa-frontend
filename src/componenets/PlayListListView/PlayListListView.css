@@ -1,0 +1,8 @@
+.single-playlist-item{
+    width: 97%;
+    margin: auto;
+    height: 10vh;
+    border: 1px white solid;
+    border-radius: 20px;
+    margin-bottom: 0.5rem;
+}
