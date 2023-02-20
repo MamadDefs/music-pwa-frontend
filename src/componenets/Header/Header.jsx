@@ -11,6 +11,7 @@ import AdminProfile from '../../pages/AdminProfile';
 import UploadMusic from '../../pages/UploadMusic';
 import UploadProfile from '../../pages/UploadProfile';
 import UserInformation from '../../pages/UserInformation'
+import PlayListSection from '../../sections/PlayListSection/PlayListSection';
 
 const Header = () => {
 
@@ -26,6 +27,7 @@ const Header = () => {
           <Route index element={<HomePage setMusicInfo={setMusicInfo} data={data} setData={setData} />} />
           <Route path="search" element={<SearchPage setMusicInfo={setMusicInfo} data={data} setData={setData} />} />
           <Route path="playlist" element={<PlaylistPage />} />
+          <Route path="playlist/*" element={<PlayListSection />} />
           <Route path="login-signup" element={<LoginPage />} />
           <Route path='userprofile' element={<UserProfile userInfo={userInfo} setUserInfo={setUserInfo} setProfileRoute={setProfileRoute} />} />
           <Route path='uploadprofile' element={<UploadProfile userInfo={userInfo} />} />

@@ -1,8 +1,9 @@
 import React from 'react'
+import PlayListSection from '../sections/PlayListSection/PlayListSection'
 
 const PlaylistPage = () => {
   return (
-    <div>PlaylistPage</div>
+    <div><PlayListSection /></div>
   )
 }
 
