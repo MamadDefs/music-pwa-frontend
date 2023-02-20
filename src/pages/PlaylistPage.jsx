@@ -1,5 +1,5 @@
 import React from 'react'
-import PlayListSection from '../sections/PlayListSection/PlayListSection'
+import PlayListSection from './SinglePlayList'
 
 const PlaylistPage = () => {
   return (
