@@ -8,7 +8,7 @@ const PlaylistPage = ({userInfo,setMusicInfo,data, setData}) => {
 
   return (
     <div className="page-content-holder">
-        {userInfo ? <PlayListListView /> : 
+        {userInfo ? <PlayListListView userInfo={userInfo}  setMusicInfo={setMusicInfo} data={data} setData={setData} /> : 
           <NeedToLogin />
         }
     </div>

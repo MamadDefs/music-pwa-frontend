@@ -5,4 +5,11 @@
     border: 1px white solid;
     border-radius: 20px;
     margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.single-playlist-item p{
+    color: white;
 }
