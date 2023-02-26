@@ -93,7 +93,7 @@ const Layout = ({ data,setMusicInfo,musicInfo,profileRoute, setProfileRoute, use
                 </nav>
             </header>
             <Outlet />
-            {musicInfo ? <MusicPlayer musicInfo={musicInfo} setMusicInfo={setMusicInfo} data={data} /> : ''}
+            {musicInfo ? <MusicPlayer userInfo={userInfo} musicInfo={musicInfo} setMusicInfo={setMusicInfo} data={data} /> : ''}
         </div>
     )
 }

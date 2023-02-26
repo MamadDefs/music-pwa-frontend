@@ -93,8 +93,8 @@ img {
 }
 
 .page-content-holder {
-  margin-top: 5rem;
-  margin-bottom: 10rem;
+  padding-top: 5rem;
+  padding-bottom: 10rem;
 }
 
 .song-image {
@@ -861,9 +861,8 @@ img {
 .musicPlayerInfo{
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   color: #F5487F;
+  text-align: right;
 }
 .musicPlayerInfo *{
   margin-top: 1rem;
@@ -952,11 +951,10 @@ img {
 
 
 .musicPlayerProgress{
-  height: 100%;
   width: 75vw;
   display: flex;
   justify-content: center;
-  margin-top: 4rem;
+  margin-top: 2rem;
   direction: rtl;
 }
 
@@ -1006,4 +1004,20 @@ input[type="range"]::-webkit-slider-thumb {
 
 .musicPlayerInnerHolderMin *{
   margin-left: 0.5rem;
+}
+
+.musicOptions{
+  color: white;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30%;
+}
+
+.info-option{
+display: flex;
+justify-content: space-between;
+width: 100%;
+padding-right: 3rem;
 }

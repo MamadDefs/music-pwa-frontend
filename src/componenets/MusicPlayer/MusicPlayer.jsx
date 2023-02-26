@@ -6,44 +6,153 @@ import SkipPreviousRoundedIcon from '@mui/icons-material/SkipPreviousRounded';
 import SkipNextRoundedIcon from '@mui/icons-material/SkipNextRounded';
 import CloseFullscreenRoundedIcon from '@mui/icons-material/CloseFullscreenRounded';
 import OpenInBrowserRoundedIcon from '@mui/icons-material/OpenInBrowserRounded';
+import PlaylistAddRoundedIcon from '@mui/icons-material/PlaylistAddRounded';
+import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
+import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
+import { Typography } from '@mui/material';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
-const MusicPlayer = ({ musicInfo,setMusicInfo,data }) => {
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '95%',
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+  borderRadius: '0.75rem',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  alignItem: 'center',
+  '*': {
+    marginTop: '8px'
+  }
+};
+
+
+const MusicPlayer = ({ userInfo, musicInfo, setMusicInfo, data }) => {
 
   const location = useLocation();
-
-  const [isMaximize,setIsMaximize]= useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [isMaximize, setIsMaximize] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [loading, setLoading] = useState(false)
+  const [playlists, setPlaylists] = useState()
 
-  useEffect(()=>{
+  const [open, setOpen] = React.useState(false);
+  const [message,setMessage]=useState('');
+  const [messageType,setMessageType]=useState('');
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+
+  const openModal = () => { setShowModal(true) }
+  const closeModal = () => { setShowModal(false) }
+
+
+  useEffect(() => {
     setIsPlaying(true);
-  },[musicInfo])
+  }, [musicInfo])
 
-  useEffect(()=>{
+  useEffect(() => {
     setIsMaximize(false);
-  },[location])
+  }, [location])
+
+  useEffect(() => {
+    const jwtToken = document.cookie.split('=')[1];
+    const option = {
+      method: 'POST',
+      body: JSON.stringify({
+        jwtToken
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      }
+    };
+    setLoading(true);
+    fetch(`https://music-pwa-api.iran.liara.run/api/playlists`, option)
+      .then((res) => res.json())
+      .then((d) => {
+        setPlaylists(d?.playlistWithMusics)
+        setLoading(false);
+      })
+  }, [userInfo])
+
+  const addToPlaylist = (playlistID) => {
+    const jwtToken = document.cookie.split('=')[1];
+    const option = {
+      method: 'POST',
+      body: JSON.stringify({
+        jwtToken,
+        playlistID,
+        music: musicInfo?.id
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      }
+    };
+    setLoading(true);
+    fetch(`https://music-pwa-api.iran.liara.run/api/playlists/add-to-playlist`, option)
+      .then((res) => res.json())
+      .then((d) => {
+        setLoading(false);
+        if (!d?.message) {
+          closeModal();
+          handleClick();
+          setMessageType('success');
+          setMessage('عملیات موفقیت آمیز بود');
+        }else{
+          handleClick();
+          setMessageType('warning');
+          setMessage('عملیات موفقیت آمیز نبود');
+        }
+      })
+  }
 
   const play = () => {
     document.getElementById('musicPlayer').play()
-    
-    
   }
 
-  const goNext=()=>{
-    const dataCount=data.length
-    const index=data.findIndex(q=>q._id==musicInfo?._id)+1
-    if(index>dataCount-1){
+  const goNext = () => {
+    const dataCount = data.length
+    const index = data.findIndex(q => q._id == musicInfo?._id) + 1
+    if (index > dataCount - 1) {
       setMusicInfo(data?.[0])
     } else {
       setMusicInfo(data?.[index])
     }
   }
 
-  const goPrev=()=>{
-    const dataCount=data.length
-    const index=data.findIndex(q=>q._id==musicInfo?._id)-1
-    if(index<0){
-      setMusicInfo(data?.[dataCount-1])
+  const goPrev = () => {
+    const dataCount = data.length
+    const index = data.findIndex(q => q._id == musicInfo?._id) - 1
+    if (index < 0) {
+      setMusicInfo(data?.[dataCount - 1])
     } else {
       setMusicInfo(data?.[index])
     }
@@ -64,81 +173,122 @@ const MusicPlayer = ({ musicInfo,setMusicInfo,data }) => {
   }
 
   const changeProgress = (e) => {
-    const currentTime  = document.getElementById('musicPlayer').currentTime;
+    const currentTime = document.getElementById('musicPlayer').currentTime;
     const duration = document.getElementById('musicPlayer').duration;
 
     setProgress(parseInt((currentTime / duration) * 100));
-    
-    if(progress>=99){
-      document.getElementById('musicPlayer').currentTime=0;
+
+    if (progress >= 99) {
+      document.getElementById('musicPlayer').currentTime = 0;
       setProgress(0);
       play();
     }
   }
 
-  const changeValue=(e)=>{
+  const changeValue = (e) => {
     const duration = document.getElementById('musicPlayer').duration;
-    document.getElementById('musicPlayer').currentTime=e.target.value/100*duration;
+    document.getElementById('musicPlayer').currentTime = e.target.value / 100 * duration;
   }
 
   return (
-    <div className={isMaximize ? 'musicPlayerHolder' : 'musicPlayerHolderMin' }>
-      { isMaximize
+    <div>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity={messageType} sx={{ position:'absolute',bottom:'0%',right:'0%',zIndex:100 }}>
+            {message}
+          </Alert>
+        </Snackbar>
+    <div className={isMaximize ? 'musicPlayerHolder' : 'musicPlayerHolderMin'}>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+      <Modal
+        open={showModal}
+        onClose={closeModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            پلی لیست ها
+            {playlists ? playlists?.map((sp, index) => {
+              return (
+                <div key={index} onClick={() => addToPlaylist(sp?.id)}>{sp?.title}</div>
+              )
+            }) : ''}
+          </Typography>
+
+        </Box>
+      </Modal>
+      
+      {isMaximize
         ?
-        <div className='minimize-btn' onClick={()=>setIsMaximize(false)}>
-            <CloseFullscreenRoundedIcon sx={{fontSize:30}} />
+        <div className='minimize-btn' onClick={() => setIsMaximize(false)}>
+          <CloseFullscreenRoundedIcon sx={{ fontSize: 30 }} />
         </div>
         :
-        <div className='maximize-btn' onClick={()=>setIsMaximize(true)} >
-          <OpenInBrowserRoundedIcon sx={{fontSize:25}} />
+        <div className='maximize-btn' onClick={() => setIsMaximize(true)} >
+          <OpenInBrowserRoundedIcon sx={{ fontSize: 25 }} />
         </div>}
-        {isMaximize ?
-      <div className='musicPlayerInnerHolder'>
-      
-        <div className={isPlaying ? 'musicPlayerImagePlaying' : 'musicPlayerImage'}>
-          <img src={musicInfo?.coverImagePath} />
-        </div>
-        
-        <div className='musicPlayerInfo'>
-          <h2>{musicInfo?.title}</h2>
-          <h3>{musicInfo?.artist}</h3>
-        </div>
-        
-        <div className='musicPlayerProgress'>
-          <input type='range' min={1} max={100} className='range' value={progress} onChange={(e)=>changeValue(e)}  />
-        </div> 
-        
+      {isMaximize ?
+        <div className='musicPlayerInnerHolder'>
+
+          <div className={isPlaying ? 'musicPlayerImagePlaying' : 'musicPlayerImage'}>
+            <img src={musicInfo?.coverImagePath} />
+          </div>
+
+          <div className='info-option'>
+            <div className='musicPlayerInfo'>
+              <h2>{musicInfo?.title}</h2>
+              <h3>{musicInfo?.artist}</h3>
+
+            </div>
+            <div className='musicOptions'>
+              <PlaylistAddRoundedIcon sx={sx2} onClick={() => openModal()} />
+              <FavoriteBorderRoundedIcon sx={sx2} />
+            </div>
+          </div>
+
+
+          <div className='musicPlayerProgress'>
+            <input type='range' min={1} max={100} className='range' value={progress} onChange={(e) => changeValue(e)} />
+          </div>
+
           <div className='musicPlayerControler' >
-          <div className='playingButton'>
-            <SkipNextRoundedIcon sx={sx} onClick={goNext} />
-            {!isPlaying ? 
-            <PlayArrowRoundsedIcon sx={sx} onClick={playingButton} /> :
-             <StopRoundedIcon sx={sx} onClick={playingButton} />}
-             <SkipPreviousRoundedIcon sx={sx} onClick={goPrev} />
+            <div className='playingButton'>
+              <SkipNextRoundedIcon sx={sx} onClick={goNext} />
+              {!isPlaying ?
+                <PlayArrowRoundsedIcon sx={sx} onClick={playingButton} /> :
+                <StopRoundedIcon sx={sx} onClick={playingButton} />}
+              <SkipPreviousRoundedIcon sx={sx} onClick={goPrev} />
+            </div>
           </div>
-          </div>
-      </div>
-       : 
-       <div className='musicPlayerInnerHolderMin'> 
-          <div className={isPlaying ? 'musicPlayerImagePlayingMin' : 'musicPlayerImageMin'}>
-          <img src={musicInfo?.coverImagePath} />
         </div>
-        <div className='playingButtonMin'>
-            <SkipNextRoundedIcon sx={sx2} onClick={goNext} />
-            {!isPlaying ? 
-            <PlayArrowRoundsedIcon sx={sx2} onClick={playingButton} /> :
-             <StopRoundedIcon sx={sx2} onClick={playingButton} />}
-             <SkipPreviousRoundedIcon sx={sx2} onClick={goPrev} />
+        :
+        <div className='musicPlayerInnerHolderMin'>
+          <div className={isPlaying ? 'musicPlayerImagePlayingMin' : 'musicPlayerImageMin'}>
+            <img src={musicInfo?.coverImagePath} />
           </div>
-       </div>
-       }
-          <audio id="musicPlayer" onTimeUpdate={(e) => changeProgress(e)} src={musicInfo?.musicPath} autoPlay={true} controls={false} />
+          <div className='playingButtonMin'>
+            <SkipNextRoundedIcon sx={sx2} onClick={goNext} />
+            {!isPlaying ?
+              <PlayArrowRoundsedIcon sx={sx2} onClick={playingButton} /> :
+              <StopRoundedIcon sx={sx2} onClick={playingButton} />}
+            <SkipPreviousRoundedIcon sx={sx2} onClick={goPrev} />
+          </div>
+        </div>
+      }
+      <audio id="musicPlayer" onTimeUpdate={(e) => changeProgress(e)} src={musicInfo?.musicPath} autoPlay={true} controls={false} />
+    </div>
     </div>
   )
 }
 
-let sx={fontSize:50}
-let sx2={fontSize:35}
+let sx = { fontSize: 50 }
+let sx2 = { fontSize: 35 }
 
 
 export default MusicPlayer

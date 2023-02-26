@@ -13,3 +13,14 @@
 .single-playlist-item p{
     color: white;
 }
+
+.create-playlist-btn{
+    display: flex;
+    color: white;
+    width: 40%;
+    justify-content: space-around;
+    align-items: center;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+
