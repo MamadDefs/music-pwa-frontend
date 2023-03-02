@@ -23,7 +23,7 @@ const Header = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout data={data} setMusicInfo={setMusicInfo} musicInfo={musicInfo} profileRoute={profileRoute} setProfileRoute={setProfileRoute} userInfo={userInfo} setUserInfo={setUserInfo} />}>
+        <Route path="/" element={<Layout data={data} setData={setData} setMusicInfo={setMusicInfo} musicInfo={musicInfo} profileRoute={profileRoute} setProfileRoute={setProfileRoute} userInfo={userInfo} setUserInfo={setUserInfo} />}>
           <Route index element={<HomePage setMusicInfo={setMusicInfo} data={data} setData={setData} />} />
           <Route path="search" element={<SearchPage setMusicInfo={setMusicInfo} data={data} setData={setData} />} />
           <Route path="playlist" element={<PlaylistPage userInfo={userInfo} setMusicInfo={setMusicInfo} data={data} setData={setData} />} />

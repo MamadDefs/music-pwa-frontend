@@ -44,7 +44,7 @@ const style = {
 };
 
 
-const MusicPlayer = ({ userInfo, musicInfo, setMusicInfo, data }) => {
+const MusicPlayer = ({ userInfo, musicInfo, setMusicInfo, data,setData }) => {
 
   const location = useLocation();
   const [showModal, setShowModal] = useState(false);
@@ -85,6 +85,37 @@ const MusicPlayer = ({ userInfo, musicInfo, setMusicInfo, data }) => {
     fetch(`https://music-pwa-api.iran.liara.run/api/musics/like/${musicInfo?._id}`, option)
       .then((res) => res.json())
       .then((d) => {
+        if(!isLiked){
+          setData(data?.map(music=>{
+            if(musicInfo?._id==music._id && music?.likers){
+              let likers= music.likers
+              let newMusic=music
+              delete newMusic.likers
+              likers.push(userInfo?._id)
+              return {
+                ...newMusic,
+                likers
+              }
+            } else {
+              return music
+            }
+          }))
+        } else {
+          setData(data?.map(music=>{
+            if(musicInfo?._id==music._id && music?.likers){
+              let likers= music.likers
+              let newMusic=music
+              delete newMusic.likers
+              likers=likers.filter(userId=>userId!=userInfo?._id)
+              return {
+                ...newMusic,
+                likers
+              }
+            } else {
+              return music
+            }
+          }))
+        }
         setLoading(false);
         setIsLiked(!isLiked)
       })
