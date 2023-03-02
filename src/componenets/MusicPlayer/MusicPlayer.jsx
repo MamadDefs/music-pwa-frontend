@@ -13,7 +13,7 @@ import { Typography } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress';  
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
@@ -98,7 +98,7 @@ const MusicPlayer = ({ userInfo, musicInfo, setMusicInfo, data }) => {
     fetch(`https://music-pwa-api.iran.liara.run/api/playlists`, option)
       .then((res) => res.json())
       .then((d) => {
-        setPlaylists(d?.playlistWithMusics)
+        setPlaylists(d?.playlists)
         setLoading(false);
       })
   }, [userInfo])
@@ -110,26 +110,27 @@ const MusicPlayer = ({ userInfo, musicInfo, setMusicInfo, data }) => {
       body: JSON.stringify({
         jwtToken,
         playlistID,
-        music: musicInfo?.id
+        music: musicInfo?._id
       }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       }
     };
+    
     setLoading(true);
     fetch(`https://music-pwa-api.iran.liara.run/api/playlists/add-to-playlist`, option)
       .then((res) => res.json())
       .then((d) => {
         setLoading(false);
-        if (!d?.message) {
+        if (!d?.error) {
           closeModal();
           handleClick();
           setMessageType('success');
           setMessage('عملیات موفقیت آمیز بود');
         }else{
           handleClick();
-          setMessageType('warning');
-          setMessage('عملیات موفقیت آمیز نبود');
+          setMessageType('error');
+          setMessage(d?.message);
         }
       })
   }
@@ -216,7 +217,7 @@ const MusicPlayer = ({ userInfo, musicInfo, setMusicInfo, data }) => {
             پلی لیست ها
             {playlists ? playlists?.map((sp, index) => {
               return (
-                <div key={index} onClick={() => addToPlaylist(sp?.id)}>{sp?.title}</div>
+                <div key={index} onClick={() => addToPlaylist(sp?._id)}>{sp?.title}</div>
               )
             }) : ''}
           </Typography>

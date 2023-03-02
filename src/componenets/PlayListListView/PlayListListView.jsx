@@ -83,12 +83,12 @@ const PlayListListView = ({ userInfo, setMusicInfo, data, setData }) => {
     fetch(`https://music-pwa-api.iran.liara.run/api/playlists`, option)
       .then((res) => res.json())
       .then((d) => {
-        setPlaylists(d?.playlistWithMusics);
+        setPlaylists(d?.playlists);
         setLoading(false);
       })
 
   }, [showModal]);
-
+  console.log(playlists)
   return (
     <div className='playlistListHolder'>
       <Backdrop
@@ -122,7 +122,7 @@ const PlayListListView = ({ userInfo, setMusicInfo, data, setData }) => {
       {playlists ?
         playlists?.map((playlist) => {
           return (
-            <Link to={`/playlist${playlist?.id ? `/${playlist?.id}` : ''}`}>
+            <Link to={`/playlist${playlist?._id ? `/${playlist?._id}` : ''}`}>
               <div className='single-playlist-item'>
                 <p>{playlist?.title}</p>
                 <p> تعداد آهنگ ها : {playlist?.musics?.length}</p>
