@@ -5,6 +5,9 @@ import HelpCenterOutlinedIcon from '@mui/icons-material/HelpCenterOutlined';
 import ImageIcon from '@mui/icons-material/Image';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import { Link } from "react-router-dom";
+import NeedToLogin from '../componenets/NeedToLogin/NeedToLogin'
+import NoAccess from '../componenets/NoAccess/NoAccess'
+
 
 const UserProfile = ({ userInfo, setUserInfo, setProfileRoute }) => {
 
@@ -22,31 +25,10 @@ const UserProfile = ({ userInfo, setUserInfo, setProfileRoute }) => {
         setProfileRoute('/login-signup');
         navigate('/login-signup')
     }
-    // const [file, setFile] = useState(null);
+    
 
-    // const onChangeFile = (e) => {
-    //     console.log(e.target.files[0])
-    //     setFile(e.target.files[0])
-    // }
-
-    // const onSubmit = () => {
-    //     const jwtToken = document.cookie.split('=')[1];
-
-    //     const formData = new FormData();
-    //     formData.append("profileImage", file);
-    //     formData.append("jwtToken", jwtToken);
-    //     try {
-    //         const res = axios.post(
-    //             "https://music-pwa-api.iran.liara.run/api/users/profile/upload-image",
-    //             formData
-    //         );
-    //         console.log(res);
-    //     } catch (ex) {
-    //         console.log(ex);
-    //     }
-
-    // }
-
+    if(!userInfo) return(<NeedToLogin />)
+    if(!(userInfo?.role=='user')) return(<NoAccess />)
     return (
         <div className="page-content-holder">
             <div className='panel-cart-section'>
@@ -62,12 +44,7 @@ const UserProfile = ({ userInfo, setUserInfo, setProfileRoute }) => {
                         <h3>آپلود پروفایل</h3>
                     </div>
                 </Link>
-                <Link to='/uploadMusic'>
-                    <div className='panel-cart' style={{ color: 'white' }}>
-                        <MusicNoteIcon />
-                        <h3>آپلود آهنگ</h3>
-                    </div>
-                </Link>
+                
                 <div className='panel-cart' style={{ color: 'red' }} onClick={deleteCookies}>
                     <HelpCenterOutlinedIcon />
                     <h3>خروج</h3>
@@ -80,23 +57,3 @@ const UserProfile = ({ userInfo, setUserInfo, setProfileRoute }) => {
 
 export default UserProfile
 
-{/* <div className="profile-holder">
-                <img className="profile-image" src={userInfo?.profileImage ? userInfo?.profileImage : defaultProfileImageUrl} alt="" />
-                <h3>عکس جدیدی برای پروفایل خود آپلود کنید</h3>
-                <form action="/users/profile/upload-image" method="post" encType="multipart/form-data">
-                    <input type="file" name="profileImage" onChange={(e) => onChangeFile(e)} />
-                </form>
-                <button type="submit" className='submitBtn' value="submit" onClick={() => onSubmit()} >آپلود</button>
-            </div>
-            <div className="account-information">
-                <br />
-                <h3>نام کاربری</h3>
-                <h4>{userInfo?.username}</h4>
-                <br />
-                <h3>ایمیل</h3>
-                <h4>{userInfo?.email}</h4>
-                <br />
-                <h3>نوع اکانت</h3>
-                <h4>معمولی‌</h4>
-                <button type="submit" onClick={() => deleteCookies()} className='exitBtn' value="submit" >خروج</button>
-            </div> */}

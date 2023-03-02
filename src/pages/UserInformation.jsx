@@ -1,6 +1,8 @@
 import React from 'react'
+import NeedToLogin from '../componenets/NeedToLogin/NeedToLogin'
 
 const UserInformation = ({ userInfo }) => {
+    if(!userInfo) return(<NeedToLogin />)
     return (
         <div className="page-content-holder">
             <div className="account-information">
@@ -12,7 +14,7 @@ const UserInformation = ({ userInfo }) => {
                 <h4>{userInfo?.email}</h4>
                 <br />
                 <h3>نوع اکانت</h3>
-                <h4>{userInfo?.type? userInfo?.type : 'معمولی‌'}</h4>
+                <h4>{userInfo?.role=='admin' ? 'مدیر' : 'معمولی‌'}</h4>
             </div>
         </div>
     )

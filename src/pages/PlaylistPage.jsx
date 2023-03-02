@@ -5,12 +5,10 @@ import PlayListListView from '../componenets/PlayListListView/PlayListListView'
 
 const PlaylistPage = ({userInfo,setMusicInfo,data, setData}) => {
   
-
+  if(!userInfo) return(<NeedToLogin />)
   return (
     <div className="page-content-holder">
-        {userInfo ? <PlayListListView userInfo={userInfo}  setMusicInfo={setMusicInfo} data={data} setData={setData} /> : 
-          <NeedToLogin />
-        }
+        <PlayListListView userInfo={userInfo}  setMusicInfo={setMusicInfo} data={data} setData={setData} />
     </div>
   )
 }

@@ -5,6 +5,8 @@ import HelpCenterOutlinedIcon from '@mui/icons-material/HelpCenterOutlined';
 import ImageIcon from '@mui/icons-material/Image';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import { Link } from "react-router-dom";
+import NeedToLogin from '../componenets/NeedToLogin/NeedToLogin'
+import NoAccess from '../componenets/NoAccess/NoAccess'
 
 const AdminProfile = ({ userInfo, setUserInfo, setProfileRoute }) => {
 
@@ -22,30 +24,8 @@ const AdminProfile = ({ userInfo, setUserInfo, setProfileRoute }) => {
         setProfileRoute('/login-signup');
         navigate('/login-signup')
     }
-    // const [file, setFile] = useState(null);
-
-    // const onChangeFile = (e) => {
-    //     console.log(e.target.files[0])
-    //     setFile(e.target.files[0])
-    // }
-
-    // const onSubmit = () => {
-    //     const jwtToken = document.cookie.split('=')[1];
-
-    //     const formData = new FormData();
-    //     formData.append("profileImage", file);
-    //     formData.append("jwtToken", jwtToken);
-    //     try {
-    //         const res = axios.post(
-    //             "https://music-pwa-api.iran.liara.run/api/users/profile/upload-image",
-    //             formData
-    //         );
-    //         console.log(res);
-    //     } catch (ex) {
-    //         console.log(ex);
-    //     }
-
-    // }
+    if(!userInfo) return(<NeedToLogin />)
+    if(!(userInfo?.role=='admin')) return(<NoAccess />)
 
     return (
         <div className="page-content-holder">

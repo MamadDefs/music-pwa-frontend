@@ -2,16 +2,18 @@
     width: 97%;
     margin: auto;
     height: 10vh;
-    border: 1px white solid;
+    border: 1px  solid;
     border-radius: 20px;
     margin-bottom: 0.5rem;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    box-shadow: rgba(245, 72, 127, 0.5) 0rem 0rem 0.8rem;
+    
 }
 
 .single-playlist-item p{
-    color: white;
+    color: white;   
 }
 
 .create-playlist-btn{

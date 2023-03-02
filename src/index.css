@@ -58,7 +58,7 @@ ul {
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 img {
@@ -101,6 +101,7 @@ img {
   width: 6rem;
   height: 6rem;
   border-radius: 0.8rem;
+  box-shadow: rgba(255, 255, 255, 0.5) 0rem 0rem 1rem;
 }
 
 .song-name {
@@ -122,6 +123,22 @@ img {
   color: white;
   margin-top: 2rem;
   margin-bottom: 2rem;
+}
+
+.plylist-section-title{
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  color: white;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.plylist-section-title *{
+  margin-left: 1.5rem;
 }
 
 .signupin {
@@ -689,10 +706,11 @@ img {
   justify-content: center;
   align-items: center;
   text-align: center;
+  box-shadow: rgba(245, 72, 172, 0.4) 0rem 0rem 1.2rem;
 }
 
 .panel-cart * {
-  margin-top: 0.5rem;
+  margin-top: 0.5rem; 
 }
 
 .account-information{
@@ -1020,4 +1038,13 @@ display: flex;
 justify-content: space-between;
 width: 100%;
 padding-right: 3rem;
+}
+
+.playlistTitleView{
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px rgba(0, 0, 0, 0.5) solid;
+  box-shadow: rgba(0, 0, 0, 0.25) 0.18rem 0.18rem;
+  text-shadow: rgba(0, 0, 0, 0.2) 0rem 0.15rem;
+  border-radius: 0.9rem;
 }

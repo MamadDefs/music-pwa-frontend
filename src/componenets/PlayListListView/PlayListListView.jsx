@@ -88,7 +88,6 @@ const PlayListListView = ({ userInfo, setMusicInfo, data, setData }) => {
       })
 
   }, [showModal]);
-  console.log(playlists)
   return (
     <div className='playlistListHolder'>
       <Backdrop
@@ -119,7 +118,7 @@ const PlayListListView = ({ userInfo, setMusicInfo, data, setData }) => {
         <AddCircleOutlineRoundedIcon sx={{ color: 'white', fontSize: '35px' }} />
         اضافه کردن
       </div>
-      {playlists ?
+      {playlists?.length!=0 ?
         playlists?.map((playlist) => {
           return (
             <Link to={`/playlist${playlist?._id ? `/${playlist?._id}` : ''}`}>

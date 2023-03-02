@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import NeedToLogin from '../componenets/NeedToLogin/NeedToLogin'
+import NoAccess from '../componenets/NoAccess/NoAccess'
 
 
-const UploadMusic = () => {
+const UploadMusic = ({userInfo}) => {
 
 
     const [loading, setLoading] = useState(false)
@@ -52,17 +54,18 @@ const UploadMusic = () => {
             axios.post(
                 "https://music-pwa-api.iran.liara.run/api/musics/upload-music",
                 formData
-            ).then((res) => { })
+            ).then((res) => { setLoading(false); })
                 .then((data) => {
                     setLoading(false);
                 });
         } catch (ex) {
             setLoading(false);
-            console.log(ex);
         }
     }
 
-
+    if(!userInfo) return(<NeedToLogin />)
+    if(!(userInfo?.role=='admin')) return(<NoAccess />)
+    
     return (
         <div className='form-holder'>
             <Backdrop

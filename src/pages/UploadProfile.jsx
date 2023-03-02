@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import NeedToLogin from '../componenets/NeedToLogin/NeedToLogin'
 
 const UploadProfile = ({ userInfo }) => {
 
@@ -11,7 +12,6 @@ const UploadProfile = ({ userInfo }) => {
     const [loading, setLoading] = useState(false)
 
     const onChangeFile = (e) => {
-        console.log(e.target.files[0])
         setFile(e.target.files[0])
     }
 
@@ -33,11 +33,10 @@ const UploadProfile = ({ userInfo }) => {
             });
         } catch (ex) {
             setLoading(false);
-            console.log(ex);
         }
 
     }
-
+    if(!userInfo) return(<NeedToLogin />)
     return (
         <div className="page-content-holder">
              <Backdrop
