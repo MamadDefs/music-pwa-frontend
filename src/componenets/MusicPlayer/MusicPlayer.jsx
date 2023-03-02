@@ -96,6 +96,7 @@ const MusicPlayer = ({ userInfo, musicInfo, setMusicInfo, data }) => {
 
   useEffect(() => {
     setIsPlaying(true);
+    setIsLiked(musicInfo?.likers?.includes(userInfo?._id) ? true : false);
   }, [musicInfo])
 
   useEffect(() => {
