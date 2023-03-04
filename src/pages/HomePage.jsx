@@ -3,6 +3,7 @@ import { Outlet, Link, useLocation, redirect } from "react-router-dom";
 import LoadingOval from '../componenets/LoadingOval/LoadingOval'
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import NoEnternet from '../componenets/NoEnternet/NoEnternet';
 
 
 const HomePage = ({setMusicInfo,data,setData}) => {
@@ -10,6 +11,7 @@ const HomePage = ({setMusicInfo,data,setData}) => {
   const [musicCount, setMusicCount] = useState(0);
   const [limit, setLimit] = useState(0);
   const [loading, setLoading] = useState(false)
+  const [noEnternet,setNoEnternet]=useState(false);
 
   useEffect(() => {
     const jwtToken = document.cookie.split('=')[1];
@@ -31,6 +33,11 @@ const HomePage = ({setMusicInfo,data,setData}) => {
       .then((d) => {
         setMusicCount(d.count)
       })
+      setTimeout(()=>{
+        if(!data){
+          setNoEnternet(true)
+        }
+      }, 5000);
   }, []);
 
 
@@ -54,6 +61,8 @@ const HomePage = ({setMusicInfo,data,setData}) => {
   var test={
     backgroundColor:'white'
   }
+
+  if(noEnternet) return (<NoEnternet />)
   if (!data) return (<LoadingOval />)
 
   return (
