@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { Typography } from '@mui/material';
+import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 
 const style = {
   position: 'absolute',
@@ -21,14 +22,14 @@ const style = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
-  borderRadius:'0.75rem',
-  display:'flex',
-  flexDirection:'column',
-  justifyContent:'space-between',
-  alignItem:'center',
-  '*':{
-    marginTop:'8px'
-    }
+  borderRadius: '0.75rem',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  alignItem: 'center',
+  '*': {
+    marginTop: '8px'
+  }
 };
 
 const PlayListListView = ({ userInfo, setMusicInfo, data, setData }) => {
@@ -36,39 +37,68 @@ const PlayListListView = ({ userInfo, setMusicInfo, data, setData }) => {
   const [loading, setLoading] = useState(false)
   const [playlists, setPlaylists] = useState()
   const [showModal, setShowModal] = useState(false);
-  const [formTitle,setFormTitle]=useState('');
-  const [error,setError]=useState('')
+  const [formTitle, setFormTitle] = useState('');
+  const [error, setError] = useState('')
 
   const openModal = () => { setShowModal(true) }
   const closeModal = () => { setShowModal(false); setError(''); }
-  const changeTitle=(e)=>{
+  const changeTitle = (e) => {
     setFormTitle(e.target.value)
   }
-  const createPlaylist=()=>{
+  const createPlaylist = () => {
     const jwtToken = document.cookie.split('=')[1];
     const option = {
       method: 'POST',
       body: JSON.stringify({
-        title:formTitle,
+        title: formTitle,
         jwtToken
       }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       }
     };
+    setLoading(true);
     fetch(`https://music-pwa-api.iran.liara.run/api/playlists/create`, option)
       .then((res) => res.json())
       .then((d) => {
-        if(d?.error){
+        if (d?.error) {
           setError(d?.message)
         } else {
           closeModal();
         }
+        fetchPlaylist();
+        setLoading(false);
       })
   }
 
-
-  useEffect(() => {
+  const deletePlaylist = (playlistID) => {
+    const jwtToken = document.cookie.split('=')[1];
+    const option = {
+      method: 'POST',
+      body: JSON.stringify({
+        playlistID,
+        jwtToken
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      }
+    };
+    setLoading(true);
+    fetch(`https://music-pwa-api.iran.liara.run/api/playlists/delete`, option)
+      .then((res) => res.json())
+      .then((d) => {
+        if (d?.error) {
+          setError(d?.message)
+        } else {
+          closeModal();
+        }
+        fetchPlaylist();
+        setLoading(false);
+      })
+  }
+  
+  
+  const fetchPlaylist=()=>{
     const jwtToken = document.cookie.split('=')[1];
     const option = {
       method: 'POST',
@@ -86,8 +116,13 @@ const PlayListListView = ({ userInfo, setMusicInfo, data, setData }) => {
         setPlaylists(d?.playlists);
         setLoading(false);
       })
+  }
 
-  }, [showModal]);
+
+  useEffect(() => {
+    fetchPlaylist();
+  }, []);
+
   return (
     <div className='playlistListHolder'>
       <Backdrop
@@ -103,30 +138,34 @@ const PlayListListView = ({ userInfo, setMusicInfo, data, setData }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          {error ? <Typography id="modal-modal-title" sx={{color:'red'}} variant="h6" component="h2">
+          {error ? <Typography id="modal-modal-title" sx={{ color: 'red' }} variant="h6" component="h2">
             {error}
           </Typography> : ''}
           <Typography id="modal-modal-title" variant="h6" component="h2">
             ایجاد پلی لیست جدید
           </Typography>
-          <TextField id="outlined-basic" onChange={(e)=>changeTitle(e)} label="نام پلی لیست" variant="outlined" />
-          <Button variant="contained" onClick={()=>createPlaylist()}>ایجاد</Button>
+          <TextField id="outlined-basic" onChange={(e) => changeTitle(e)} label="نام پلی لیست" variant="outlined" />
+          <Button variant="contained" onClick={() => createPlaylist()}>ایجاد</Button>
         </Box>
       </Modal>
-
       <div className='create-playlist-btn' onClick={() => openModal()}>
         <AddCircleOutlineRoundedIcon sx={{ color: 'white', fontSize: '35px' }} />
         اضافه کردن
       </div>
-      {playlists?.length!=0 ?
+      {playlists?.length != 0 ?
         playlists?.map((playlist) => {
           return (
-            <Link to={`/playlist${playlist?._id ? `/${playlist?._id}` : ''}`}>
-              <div className='single-playlist-item'>
-                <p>{playlist?.title}</p>
-                <p> تعداد آهنگ ها : {playlist?.musics?.length}</p>
-              </div>
-            </Link>
+
+            <div className='single-playlist-item'>
+              <Link to={`/playlist${playlist?._id ? `/${playlist?._id}` : ''}`}>
+                <div>
+                  <p>{playlist?.title}</p>
+                  <p> تعداد آهنگ ها : {playlist?.musics?.length}</p>
+                </div>
+              </Link>
+              <DeleteForeverRoundedIcon sx={{fontSize:'30px',color:'white'}} onClick={() => deletePlaylist(playlist?._id)} />
+            </div>
+
           )
         })
         : <p style={{ color: 'white', margin: 'auto', width: '50%' }}>شما هنوز پلی لیستی ندارید</p>}

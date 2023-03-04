@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import PlayArrowRoundsedIcon from '@mui/icons-material/PlayArrowRounded';
 import StopRoundedIcon from '@mui/icons-material/StopRounded';
 import SkipPreviousRoundedIcon from '@mui/icons-material/SkipPreviousRounded';
@@ -44,7 +44,7 @@ const style = {
 };
 
 
-const MusicPlayer = ({ userInfo, musicInfo, setMusicInfo, data,setData }) => {
+const MusicPlayer = ({ userInfo, musicInfo, setMusicInfo, data, setData }) => {
 
   const location = useLocation();
   const [showModal, setShowModal] = useState(false);
@@ -85,11 +85,11 @@ const MusicPlayer = ({ userInfo, musicInfo, setMusicInfo, data,setData }) => {
     fetch(`https://music-pwa-api.iran.liara.run/api/musics/like/${musicInfo?._id}`, option)
       .then((res) => res.json())
       .then((d) => {
-        if(!isLiked){
-          setData(data?.map(music=>{
-            if(musicInfo?._id==music._id && music?.likers){
-              let likers= music.likers
-              let newMusic=music
+        if (!isLiked) {
+          setData(data?.map(music => {
+            if (musicInfo?._id == music._id && music?.likers) {
+              let likers = music.likers
+              let newMusic = music
               delete newMusic.likers
               likers.push(userInfo?._id)
               return {
@@ -101,12 +101,12 @@ const MusicPlayer = ({ userInfo, musicInfo, setMusicInfo, data,setData }) => {
             }
           }))
         } else {
-          setData(data?.map(music=>{
-            if(musicInfo?._id==music._id && music?.likers){
-              let likers= music.likers
-              let newMusic=music
+          setData(data?.map(music => {
+            if (musicInfo?._id == music._id && music?.likers) {
+              let likers = music.likers
+              let newMusic = music
               delete newMusic.likers
-              likers=likers.filter(userId=>userId!=userInfo?._id)
+              likers = likers.filter(userId => userId != userInfo?._id)
               return {
                 ...newMusic,
                 likers
@@ -231,9 +231,7 @@ const MusicPlayer = ({ userInfo, musicInfo, setMusicInfo, data,setData }) => {
     setProgress(parseInt((currentTime / duration) * 100));
 
     if (progress >= 99) {
-      document.getElementById('musicPlayer').currentTime = 0;
-      setProgress(0);
-      play();
+      goNext();
     }
   }
 
@@ -294,15 +292,32 @@ const MusicPlayer = ({ userInfo, musicInfo, setMusicInfo, data,setData }) => {
 
             <div className='info-option'>
               <div className='musicPlayerInfo'>
-                <h2>{musicInfo?.title}</h2>
-                <h3>{musicInfo?.artist}</h3>
-
+                <p>عنوان: {musicInfo?.title}</p>
+                <p>خوانندگان:</p>
+                <div className='array-name'>
+                {musicInfo?.artist?.map((q,index)=>{
+                  return(
+                    <Link to={`artist/${q}`}><p>{index!=musicInfo?.artist?.length-1 ? ',' : ''}{q}</p></Link>
+                  )
+                })}
+                </div>
+                <p>دسته بندی:</p>
+                <div className='array-name'>
+                {musicInfo?.category?.map((q,index)=>{
+                  return(
+                    <Link to={`category/${q}`}><p>{index!=musicInfo?.category?.length-1 ? ',' : ''}{q}</p></Link>
+                  )
+                })}
+                </div>
               </div>
-              <div className='musicOptions'>
+              <div className='musicActionbtn'>
+
                 <PlaylistAddRoundedIcon sx={sx2} onClick={() => openModal()} />
+
                 {!isLiked ?
                   <FavoriteBorderRoundedIcon sx={sx2} onClick={() => likeSong()} /> :
                   <FavoriteRoundedIcon sx={sx2} onClick={() => likeSong()} />}
+
               </div>
             </div>
 
@@ -341,8 +356,8 @@ const MusicPlayer = ({ userInfo, musicInfo, setMusicInfo, data,setData }) => {
   )
 }
 
-let sx = { fontSize: 50 }
-let sx2 = { fontSize: 35 }
+let sx = { fontSize: 50, color: 'white' }
+let sx2 = { fontSize: 35, color: 'white' }
 
 
 export default MusicPlayer

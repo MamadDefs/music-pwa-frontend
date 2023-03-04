@@ -12,6 +12,8 @@ import UploadMusic from '../../pages/UploadMusic';
 import UploadProfile from '../../pages/UploadProfile';
 import UserInformation from '../../pages/UserInformation'
 import PlayListSection from '../../pages/SinglePlayList';
+import ArtistPage from '../../pages/ArtistPage';
+import CategoryPage from '../../pages/CategoryPage';
 
 const Header = () => {
 
@@ -34,6 +36,8 @@ const Header = () => {
           <Route path='userinformation' element={<UserInformation userInfo={userInfo} />} />
           <Route path='adminprofile' element={<AdminProfile userInfo={userInfo} setUserInfo={setUserInfo} setProfileRoute={setProfileRoute} />} />
           <Route path='uploadMusic' element={<UploadMusic userInfo={userInfo} />} />
+          <Route path='artist/*' element={<ArtistPage data={data} setData={setData} setMusicInfo={setMusicInfo} />} />
+          <Route path='category/*' element={<CategoryPage data={data} setData={setData} setMusicInfo={setMusicInfo} />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

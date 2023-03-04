@@ -49,7 +49,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family:    Calibri, sans-serif;
   background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
 }
 
@@ -64,6 +64,9 @@ a {
 img {
   max-width: 100%;
   height: auto;
+}
+p{
+  font-size: 1.5rem;
 }
 
 /*=============== REUSABLE CSS CLASSES ===============*/
@@ -872,13 +875,13 @@ img {
   width: 100vw;
   height: 100vh;
   background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
-  padding-top: 4rem;
+  padding-top: 3.5rem;
   padding-bottom: 20rem;
 }
 
 .musicPlayerInfo{
-  display: flex;
-  flex-direction: column;
+  font-size: 1rem !important;
+  display: grid;
   color: #F5487F;
   text-align: right;
 }
@@ -894,7 +897,7 @@ img {
   justify-content: space-between;
 }
 .musicPlayerInnerHolder{
-  margin-bottom: 20rem;
+  padding-bottom: 20rem;
 }
 
 .musicPlayerControler{
@@ -974,6 +977,7 @@ img {
   justify-content: center;
   margin-top: 2rem;
   direction: rtl;
+  margin-bottom: 0.5rem;
 }
 
 input[type="range"] {
@@ -1034,10 +1038,15 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .info-option{
-display: flex;
-justify-content: space-between;
+display: grid;
+grid-template-columns: 6fr 2fr;
 width: 100%;
-padding-right: 3rem;
+padding-right: 2.5rem;
+padding-left: 0.5rem;
+}
+
+.info-option *{
+  margin: 0rem;
 }
 
 .playlistTitleView{
@@ -1047,4 +1056,21 @@ padding-right: 3rem;
   box-shadow: rgba(0, 0, 0, 0.25) 0.18rem 0.18rem;
   text-shadow: rgba(0, 0, 0, 0.2) 0rem 0.15rem;
   border-radius: 0.9rem;
+}
+
+.musicActionbtn{
+  display: grid;
+  grid-template-rows: 1fr 1fr; 
+}
+
+.array-name{
+  margin-top: 0;
+  display: flex; 
+  flex-direction: row-reverse;
+  justify-content: start;
+  text-align: right;
+}
+
+.array-name *{
+  margin: 0.1rem;
 }
