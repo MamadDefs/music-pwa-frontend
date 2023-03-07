@@ -22,7 +22,7 @@ const HomePage = ({setMusicInfo,data,setData}) => {
       }
     };
     setLoading(true);
-    fetch(`https://music-pwa-api.iran.liara.run/api/musics/all?page=1&limit=${limit*9+9}`, option)
+    let result=fetch(`https://music-pwa-api.iran.liara.run/api/musics/all?page=1&limit=${limit*9+9}`, option)
       .then((res) => res.json())
       .then((d) => {
         setData(d.musics)
@@ -33,13 +33,12 @@ const HomePage = ({setMusicInfo,data,setData}) => {
       .then((d) => {
         setMusicCount(d.count)
       })
-      setTimeout(()=>{
-        if(!data){
-          setNoEnternet(true)
-        }
-      }, 5000);
+      if(!result){
+        setNoEnternet(true);
+      }
   }, []);
 
+  
 
   const loadmore=()=>{
     setLimit(limit+1);
@@ -61,7 +60,7 @@ const HomePage = ({setMusicInfo,data,setData}) => {
   var test={
     backgroundColor:'white'
   }
-
+  
   if(noEnternet) return (<NoEnternet />)
   if (!data) return (<LoadingOval />)
 
